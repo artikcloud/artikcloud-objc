@@ -1,0 +1,252 @@
+# ACDevicessharesApi
+
+All URIs are relative to *https://api.artik.cloud/v1.1*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**createShareForDevice**](ACDevicessharesApi.md#createsharefordevice) | **POST** in/api/devices/{deviceId}/shares | Share a device 
+[**deleteSharingForDevice**](ACDevicessharesApi.md#deletesharingfordevice) | **DELETE** in/api/devices/{deviceId}/shares/{shareId} | Delete specific share of the given device id
+[**getAllSharesForDevice**](ACDevicessharesApi.md#getallsharesfordevice) | **GET** in/api/devices/{deviceId}/shares | List all shares for the given device id
+[**getSharingForDevice**](ACDevicessharesApi.md#getsharingfordevice) | **GET** in/api/devices/{deviceId}/shares/{shareId} | Get specific share of the given device id
+
+
+# **createShareForDevice**
+```objc
+-(NSURLSessionTask*) createShareForDeviceWithDeviceId: (NSString*) deviceId
+    deviceShareInfo: (ACDeviceShareInfo*) deviceShareInfo
+        completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler;
+```
+
+Share a device 
+
+Share a device 
+
+### Example 
+```objc
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+NSString* deviceId = @"deviceId_example"; // Device ID.
+ACDeviceShareInfo* deviceShareInfo = [[ACDeviceShareInfo alloc] init]; // Device object that needs to be added
+
+ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+
+// Share a device 
+[apiInstance createShareForDeviceWithDeviceId:deviceId
+              deviceShareInfo:deviceShareInfo
+          completionHandler: ^(ACDeviceSharingId* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling ACDevicessharesApi->createShareForDevice: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deviceId** | **NSString***| Device ID. | 
+ **deviceShareInfo** | [**ACDeviceShareInfo***](ACDeviceShareInfo*.md)| Device object that needs to be added | 
+
+### Return type
+
+[**ACDeviceSharingId***](ACDeviceSharingId.md)
+
+### Authorization
+
+[artikcloud_oauth](../README.md#artikcloud_oauth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteSharingForDevice**
+```objc
+-(NSURLSessionTask*) deleteSharingForDeviceWithDeviceId: (NSString*) deviceId
+    shareId: (NSString*) shareId
+        completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler;
+```
+
+Delete specific share of the given device id
+
+Delete specific share of the given device id
+
+### Example 
+```objc
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+NSString* deviceId = @"deviceId_example"; // Device ID.
+NSString* shareId = @"shareId_example"; // Share ID.
+
+ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+
+// Delete specific share of the given device id
+[apiInstance deleteSharingForDeviceWithDeviceId:deviceId
+              shareId:shareId
+          completionHandler: ^(ACDeviceSharingId* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling ACDevicessharesApi->deleteSharingForDevice: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deviceId** | **NSString***| Device ID. | 
+ **shareId** | **NSString***| Share ID. | 
+
+### Return type
+
+[**ACDeviceSharingId***](ACDeviceSharingId.md)
+
+### Authorization
+
+[artikcloud_oauth](../README.md#artikcloud_oauth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAllSharesForDevice**
+```objc
+-(NSURLSessionTask*) getAllSharesForDeviceWithDeviceId: (NSString*) deviceId
+    count: (NSNumber*) count
+    offset: (NSNumber*) offset
+        completionHandler: (void (^)(ACDeviceSharingEnvelope* output, NSError* error)) handler;
+```
+
+List all shares for the given device id
+
+List all shares for the given device id
+
+### Example 
+```objc
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+NSString* deviceId = @"deviceId_example"; // Device ID.
+NSNumber* count = @56; // Desired count of items in the result set. (optional)
+NSNumber* offset = @56; // Offset for pagination. (optional)
+
+ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+
+// List all shares for the given device id
+[apiInstance getAllSharesForDeviceWithDeviceId:deviceId
+              count:count
+              offset:offset
+          completionHandler: ^(ACDeviceSharingEnvelope* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling ACDevicessharesApi->getAllSharesForDevice: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deviceId** | **NSString***| Device ID. | 
+ **count** | **NSNumber***| Desired count of items in the result set. | [optional] 
+ **offset** | **NSNumber***| Offset for pagination. | [optional] 
+
+### Return type
+
+[**ACDeviceSharingEnvelope***](ACDeviceSharingEnvelope.md)
+
+### Authorization
+
+[artikcloud_oauth](../README.md#artikcloud_oauth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSharingForDevice**
+```objc
+-(NSURLSessionTask*) getSharingForDeviceWithDeviceId: (NSString*) deviceId
+    shareId: (NSString*) shareId
+        completionHandler: (void (^)(ACDeviceSharing* output, NSError* error)) handler;
+```
+
+Get specific share of the given device id
+
+Get specific share of the given device id
+
+### Example 
+```objc
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+NSString* deviceId = @"deviceId_example"; // Device ID.
+NSString* shareId = @"shareId_example"; // Share ID.
+
+ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+
+// Get specific share of the given device id
+[apiInstance getSharingForDeviceWithDeviceId:deviceId
+              shareId:shareId
+          completionHandler: ^(ACDeviceSharing* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling ACDevicessharesApi->getSharingForDevice: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deviceId** | **NSString***| Device ID. | 
+ **shareId** | **NSString***| Share ID. | 
+
+### Return type
+
+[**ACDeviceSharing***](ACDeviceSharing.md)
+
+### Authorization
+
+[artikcloud_oauth](../README.md#artikcloud_oauth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

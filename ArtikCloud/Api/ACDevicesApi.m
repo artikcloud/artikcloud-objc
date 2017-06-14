@@ -1,5 +1,6 @@
 #import "ACDevicesApi.h"
 #import "ACQueryParamCollection.h"
+#import "ACApiClient.h"
 #import "ACDevice.h"
 #import "ACDeviceEnvelope.h"
 #import "ACDeviceTokenEnvelope.h"
@@ -8,7 +9,7 @@
 
 @interface ACDevicesApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -22,52 +23,31 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACDevicesApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -79,7 +59,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceEnvelope*
 ///
--(NSNumber*) addDeviceWithDevice: (ACDevice*) device
+-(NSURLSessionTask*) addDeviceWithDevice: (ACDevice*) device
     completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'device' is set
     if (device == nil) {
@@ -138,8 +118,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -149,7 +128,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceEnvelope*
 ///
--(NSNumber*) deleteDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) deleteDeviceWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -210,8 +189,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -221,7 +199,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTokenEnvelope*
 ///
--(NSNumber*) deleteDeviceTokenWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) deleteDeviceTokenWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACDeviceTokenEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -282,8 +260,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTokenEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -293,7 +270,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceEnvelope*
 ///
--(NSNumber*) getDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) getDeviceWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -354,8 +331,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -365,7 +341,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACPresenceEnvelope*
 ///
--(NSNumber*) getDevicePresenceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) getDevicePresenceWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACPresenceEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -426,8 +402,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACPresenceEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -437,7 +412,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTokenEnvelope*
 ///
--(NSNumber*) getDeviceTokenWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) getDeviceTokenWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACDeviceTokenEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -498,8 +473,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTokenEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -511,7 +485,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceEnvelope*
 ///
--(NSNumber*) updateDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) updateDeviceWithDeviceId: (NSString*) deviceId
     device: (ACDevice*) device
     completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
@@ -585,8 +559,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -596,7 +569,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTokenEnvelope*
 ///
--(NSNumber*) updateDeviceTokenWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) updateDeviceTokenWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACDeviceTokenEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -657,8 +630,7 @@ NSInteger kACDevicesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTokenEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

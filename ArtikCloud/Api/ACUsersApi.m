@@ -1,16 +1,18 @@
 #import "ACUsersApi.h"
 #import "ACQueryParamCollection.h"
-#import "ACPropertiesEnvelope.h"
+#import "ACApiClient.h"
 #import "ACAppProperties.h"
-#import "ACUserEnvelope.h"
+#import "ACDeviceSharingEnvelope.h"
 #import "ACDeviceTypesEnvelope.h"
 #import "ACDevicesEnvelope.h"
+#import "ACPropertiesEnvelope.h"
 #import "ACRulesEnvelope.h"
+#import "ACUserEnvelope.h"
 
 
 @interface ACUsersApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -24,52 +26,31 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACUsersApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -85,7 +66,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACPropertiesEnvelope*
 ///
--(NSNumber*) createUserPropertiesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) createUserPropertiesWithUserId: (NSString*) userId
     properties: (ACAppProperties*) properties
     aid: (NSString*) aid
     completionHandler: (void (^)(ACPropertiesEnvelope* output, NSError* error)) handler {
@@ -163,8 +144,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACPropertiesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -176,7 +156,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACPropertiesEnvelope*
 ///
--(NSNumber*) deleteUserPropertiesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) deleteUserPropertiesWithUserId: (NSString*) userId
     aid: (NSString*) aid
     completionHandler: (void (^)(ACPropertiesEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'userId' is set
@@ -241,8 +221,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACPropertiesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -250,7 +229,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 /// Get's the current user's profile
 ///  @returns ACUserEnvelope*
 ///
--(NSNumber*) getSelfWithCompletionHandler: 
+-(NSURLSessionTask*) getSelfWithCompletionHandler: 
     (void (^)(ACUserEnvelope* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/users/self"];
 
@@ -297,8 +276,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACUserEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -314,7 +292,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTypesEnvelope*
 ///
--(NSNumber*) getUserDeviceTypesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) getUserDeviceTypesWithUserId: (NSString*) userId
     offset: (NSNumber*) offset
     count: (NSNumber*) count
     includeShared: (NSNumber*) includeShared
@@ -387,8 +365,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTypesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -402,12 +379,18 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @param includeProperties Optional. Boolean (true/false) - If false, only return the user's device types. If true, also return device types shared by other users. (optional)
 ///
+///  @param owner Return owned and/or shared devices. Default to ALL. (optional)
+///
+///  @param includeShareInfo Include share info (optional)
+///
 ///  @returns ACDevicesEnvelope*
 ///
--(NSNumber*) getUserDevicesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) getUserDevicesWithUserId: (NSString*) userId
     offset: (NSNumber*) offset
     count: (NSNumber*) count
     includeProperties: (NSNumber*) includeProperties
+    owner: (NSString*) owner
+    includeShareInfo: (NSNumber*) includeShareInfo
     completionHandler: (void (^)(ACDevicesEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'userId' is set
     if (userId == nil) {
@@ -439,6 +422,12 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
     }
     if (includeProperties != nil) {
         queryParams[@"includeProperties"] = includeProperties;
+    }
+    if (owner != nil) {
+        queryParams[@"owner"] = owner;
+    }
+    if (includeShareInfo != nil) {
+        queryParams[@"includeShareInfo"] = includeShareInfo;
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -477,8 +466,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDevicesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -490,7 +478,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACPropertiesEnvelope*
 ///
--(NSNumber*) getUserPropertiesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) getUserPropertiesWithUserId: (NSString*) userId
     aid: (NSString*) aid
     completionHandler: (void (^)(ACPropertiesEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'userId' is set
@@ -555,8 +543,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACPropertiesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -572,7 +559,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACRulesEnvelope*
 ///
--(NSNumber*) getUserRulesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) getUserRulesWithUserId: (NSString*) userId
     excludeDisabled: (NSNumber*) excludeDisabled
     count: (NSNumber*) count
     offset: (NSNumber*) offset
@@ -645,8 +632,107 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACRulesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
+}
+
+///
+/// Get User shares
+/// Get User shares
+///  @param userId User ID. 
+///
+///  @param filter filter 
+///
+///  @param count Desired count of items in the result set. (optional)
+///
+///  @param offset Offset for pagination. (optional)
+///
+///  @returns ACDeviceSharingEnvelope*
+///
+-(NSURLSessionTask*) listAllSharesForUserWithUserId: (NSString*) userId
+    filter: (NSString*) filter
+    count: (NSNumber*) count
+    offset: (NSNumber*) offset
+    completionHandler: (void (^)(ACDeviceSharingEnvelope* output, NSError* error)) handler {
+    // verify the required parameter 'userId' is set
+    if (userId == nil) {
+        NSParameterAssert(userId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"userId"] };
+            NSError* error = [NSError errorWithDomain:kACUsersApiErrorDomain code:kACUsersApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'filter' is set
+    if (filter == nil) {
+        NSParameterAssert(filter);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"filter"] };
+            NSError* error = [NSError errorWithDomain:kACUsersApiErrorDomain code:kACUsersApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"in/api/users/{userId}/shares"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (userId != nil) {
+        pathParams[@"userId"] = userId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (filter != nil) {
+        queryParams[@"filter"] = filter;
+    }
+    if (count != nil) {
+        queryParams[@"count"] = count;
+    }
+    if (offset != nil) {
+        queryParams[@"offset"] = offset;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"artikcloud_oauth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"ACDeviceSharingEnvelope*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((ACDeviceSharingEnvelope*)data, error);
+                                }
+                            }];
 }
 
 ///
@@ -660,7 +746,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACPropertiesEnvelope*
 ///
--(NSNumber*) updateUserPropertiesWithUserId: (NSString*) userId
+-(NSURLSessionTask*) updateUserPropertiesWithUserId: (NSString*) userId
     properties: (ACAppProperties*) properties
     aid: (NSString*) aid
     completionHandler: (void (^)(ACPropertiesEnvelope* output, NSError* error)) handler {
@@ -738,8 +824,7 @@ NSInteger kACUsersApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACPropertiesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

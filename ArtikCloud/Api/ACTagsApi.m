@@ -1,11 +1,12 @@
 #import "ACTagsApi.h"
 #import "ACQueryParamCollection.h"
+#import "ACApiClient.h"
 #import "ACTagsEnvelope.h"
 
 
 @interface ACTagsApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -19,52 +20,31 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACTagsApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -74,7 +54,7 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
 /// Get all tags marked as categories
 ///  @returns ACTagsEnvelope*
 ///
--(NSNumber*) getTagCategoriesWithCompletionHandler: 
+-(NSURLSessionTask*) getTagCategoriesWithCompletionHandler: 
     (void (^)(ACTagsEnvelope* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/tags/categories"];
 
@@ -121,8 +101,7 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACTagsEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -138,7 +117,7 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACTagsEnvelope*
 ///
--(NSNumber*) getTagSuggestionsWithEntityType: (NSString*) entityType
+-(NSURLSessionTask*) getTagSuggestionsWithEntityType: (NSString*) entityType
     tags: (NSString*) tags
     name: (NSString*) name
     count: (NSNumber*) count
@@ -200,8 +179,7 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACTagsEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -211,7 +189,7 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACTagsEnvelope*
 ///
--(NSNumber*) getTagsByCategoriesWithCategories: (NSString*) categories
+-(NSURLSessionTask*) getTagsByCategoriesWithCategories: (NSString*) categories
     completionHandler: (void (^)(ACTagsEnvelope* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/tags"];
 
@@ -261,8 +239,7 @@ NSInteger kACTagsApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACTagsEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

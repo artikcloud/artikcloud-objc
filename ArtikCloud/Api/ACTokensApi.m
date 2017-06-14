@@ -1,14 +1,15 @@
 #import "ACTokensApi.h"
 #import "ACQueryParamCollection.h"
-#import "ACTokenRequest.h"
+#import "ACApiClient.h"
 #import "ACCheckTokenResponse.h"
 #import "ACRefreshTokenResponse.h"
 #import "ACTokenInfoSuccessResponse.h"
+#import "ACTokenRequest.h"
 
 
 @interface ACTokensApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -22,52 +23,31 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACTokensApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -79,7 +59,7 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACCheckTokenResponse*
 ///
--(NSNumber*) checkTokenWithTokenInfo: (ACTokenRequest*) tokenInfo
+-(NSURLSessionTask*) checkTokenWithTokenInfo: (ACTokenRequest*) tokenInfo
     completionHandler: (void (^)(ACCheckTokenResponse* output, NSError* error)) handler {
     // verify the required parameter 'tokenInfo' is set
     if (tokenInfo == nil) {
@@ -138,8 +118,7 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACCheckTokenResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -151,7 +130,7 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACRefreshTokenResponse*
 ///
--(NSNumber*) refreshTokenWithGrantType: (NSString*) grantType
+-(NSURLSessionTask*) refreshTokenWithGrantType: (NSString*) grantType
     refreshToken: (NSString*) refreshToken
     completionHandler: (void (^)(ACRefreshTokenResponse* output, NSError* error)) handler {
     // verify the required parameter 'grantType' is set
@@ -227,8 +206,7 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACRefreshTokenResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -236,7 +214,7 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
 /// Returns the Token Information
 ///  @returns ACTokenInfoSuccessResponse*
 ///
--(NSNumber*) tokenInfoWithCompletionHandler: 
+-(NSURLSessionTask*) tokenInfoWithCompletionHandler: 
     (void (^)(ACTokenInfoSuccessResponse* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/accounts/tokenInfo"];
 
@@ -283,8 +261,7 @@ NSInteger kACTokensApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACTokenInfoSuccessResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

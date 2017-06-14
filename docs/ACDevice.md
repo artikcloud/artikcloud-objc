@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **certificateSignature** | **NSString*** | Certificate Signature (if any) | [optional] 
 **eid** | **NSString*** | External ID (if any) | [optional] 
 **providerCredentials** | **NSDictionary&lt;NSString*, NSObject*&gt;*** |  | [optional] 
+**sharedWithOthers** | **NSNumber*** | Is shared with other users | [optional] 
+**sharedWithMe** | **NSString*** | Share id (if shared with me) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

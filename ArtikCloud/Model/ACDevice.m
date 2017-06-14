@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"id": @"_id", @"uid": @"uid", @"dtid": @"dtid", @"name": @"name", @"manifestVersion": @"manifestVersion", @"manifestVersionPolicy": @"manifestVersionPolicy", @"needProviderAuth": @"needProviderAuth", @"properties": @"properties", @"createdOn": @"createdOn", @"connected": @"connected", @"certificateInfo": @"certificateInfo", @"certificateSignature": @"certificateSignature", @"eid": @"eid", @"providerCredentials": @"providerCredentials" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"_id": @"id", @"uid": @"uid", @"dtid": @"dtid", @"name": @"name", @"manifestVersion": @"manifestVersion", @"manifestVersionPolicy": @"manifestVersionPolicy", @"needProviderAuth": @"needProviderAuth", @"properties": @"properties", @"createdOn": @"createdOn", @"connected": @"connected", @"certificateInfo": @"certificateInfo", @"certificateSignature": @"certificateSignature", @"eid": @"eid", @"providerCredentials": @"providerCredentials", @"sharedWithOthers": @"sharedWithOthers", @"sharedWithMe": @"sharedWithMe" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"_id", @"uid", @"dtid", @"name", @"manifestVersion", @"manifestVersionPolicy", @"needProviderAuth", @"properties", @"createdOn", @"connected", @"certificateInfo", @"certificateSignature", @"eid", @"providerCredentials"];
+  NSArray *optionalProperties = @[@"_id", @"uid", @"dtid", @"name", @"manifestVersion", @"manifestVersionPolicy", @"needProviderAuth", @"properties", @"createdOn", @"connected", @"certificateInfo", @"certificateSignature", @"eid", @"providerCredentials", @"sharedWithOthers", @"sharedWithMe"];
   return [optionalProperties containsObject:propertyName];
 }
 

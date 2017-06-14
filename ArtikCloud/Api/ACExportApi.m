@@ -1,14 +1,15 @@
 #import "ACExportApi.h"
 #import "ACQueryParamCollection.h"
-#import "ACExportRequestResponse.h"
-#import "ACExportRequestInfo.h"
+#import "ACApiClient.h"
 #import "ACExportHistoryResponse.h"
+#import "ACExportRequestInfo.h"
+#import "ACExportRequestResponse.h"
 #import "ACExportStatusResponse.h"
 
 
 @interface ACExportApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -22,52 +23,31 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACExportApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -79,7 +59,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACExportRequestResponse*
 ///
--(NSNumber*) exportRequestWithExportRequestInfo: (ACExportRequestInfo*) exportRequestInfo
+-(NSURLSessionTask*) exportRequestWithExportRequestInfo: (ACExportRequestInfo*) exportRequestInfo
     completionHandler: (void (^)(ACExportRequestResponse* output, NSError* error)) handler {
     // verify the required parameter 'exportRequestInfo' is set
     if (exportRequestInfo == nil) {
@@ -138,8 +118,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACExportRequestResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -153,7 +132,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACExportHistoryResponse*
 ///
--(NSNumber*) getExportHistoryWithTrialId: (NSString*) trialId
+-(NSURLSessionTask*) getExportHistoryWithTrialId: (NSString*) trialId
     count: (NSNumber*) count
     offset: (NSNumber*) offset
     completionHandler: (void (^)(ACExportHistoryResponse* output, NSError* error)) handler {
@@ -211,8 +190,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACExportHistoryResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -222,7 +200,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
 ///
 ///  @returns NSString*
 ///
--(NSNumber*) getExportResultWithExportId: (NSString*) exportId
+-(NSURLSessionTask*) getExportResultWithExportId: (NSString*) exportId
     completionHandler: (void (^)(NSString* output, NSError* error)) handler {
     // verify the required parameter 'exportId' is set
     if (exportId == nil) {
@@ -283,8 +261,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((NSString*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -294,7 +271,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACExportStatusResponse*
 ///
--(NSNumber*) getExportStatusWithExportId: (NSString*) exportId
+-(NSURLSessionTask*) getExportStatusWithExportId: (NSString*) exportId
     completionHandler: (void (^)(ACExportStatusResponse* output, NSError* error)) handler {
     // verify the required parameter 'exportId' is set
     if (exportId == nil) {
@@ -355,8 +332,7 @@ NSInteger kACExportApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACExportStatusResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

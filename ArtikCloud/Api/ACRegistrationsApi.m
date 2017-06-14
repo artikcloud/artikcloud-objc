@@ -1,14 +1,15 @@
 #import "ACRegistrationsApi.h"
 #import "ACQueryParamCollection.h"
-#import "ACDeviceRegConfirmUserResponseEnvelope.h"
+#import "ACApiClient.h"
 #import "ACDeviceRegConfirmUserRequest.h"
+#import "ACDeviceRegConfirmUserResponseEnvelope.h"
 #import "ACDeviceRegStatusResponseEnvelope.h"
 #import "ACUnregisterDeviceResponseEnvelope.h"
 
 
 @interface ACRegistrationsApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -22,52 +23,31 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACRegistrationsApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -79,7 +59,7 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceRegConfirmUserResponseEnvelope*
 ///
--(NSNumber*) confirmUserWithRegistrationInfo: (ACDeviceRegConfirmUserRequest*) registrationInfo
+-(NSURLSessionTask*) confirmUserWithRegistrationInfo: (ACDeviceRegConfirmUserRequest*) registrationInfo
     completionHandler: (void (^)(ACDeviceRegConfirmUserResponseEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'registrationInfo' is set
     if (registrationInfo == nil) {
@@ -138,8 +118,7 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceRegConfirmUserResponseEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -149,7 +128,7 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceRegStatusResponseEnvelope*
 ///
--(NSNumber*) getRequestStatusForUserWithRequestId: (NSString*) requestId
+-(NSURLSessionTask*) getRequestStatusForUserWithRequestId: (NSString*) requestId
     completionHandler: (void (^)(ACDeviceRegStatusResponseEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'requestId' is set
     if (requestId == nil) {
@@ -210,8 +189,7 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceRegStatusResponseEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -221,7 +199,7 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACUnregisterDeviceResponseEnvelope*
 ///
--(NSNumber*) unregisterDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) unregisterDeviceWithDeviceId: (NSString*) deviceId
     completionHandler: (void (^)(ACUnregisterDeviceResponseEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
@@ -282,8 +260,7 @@ NSInteger kACRegistrationsApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACUnregisterDeviceResponseEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

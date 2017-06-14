@@ -1,19 +1,20 @@
 #import "ACMessagesApi.h"
 #import "ACQueryParamCollection.h"
-#import "ACAggregatesHistogramResponse.h"
-#import "ACFieldPresenceEnvelope.h"
-#import "ACNormalizedMessagesEnvelope.h"
-#import "ACAggregatesResponse.h"
-#import "ACSnapshotResponses.h"
-#import "ACNormalizedActionsEnvelope.h"
-#import "ACMessageIDEnvelope.h"
+#import "ACApiClient.h"
 #import "ACActions.h"
+#import "ACAggregatesHistogramResponse.h"
+#import "ACAggregatesResponse.h"
+#import "ACFieldPresenceEnvelope.h"
 #import "ACMessage.h"
+#import "ACMessageIDEnvelope.h"
+#import "ACNormalizedActionsEnvelope.h"
+#import "ACNormalizedMessagesEnvelope.h"
+#import "ACSnapshotResponses.h"
 
 
 @interface ACMessagesApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -27,52 +28,31 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACMessagesApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -92,7 +72,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACAggregatesHistogramResponse*
 ///
--(NSNumber*) getAggregatesHistogramWithStartDate: (NSNumber*) startDate
+-(NSURLSessionTask*) getAggregatesHistogramWithStartDate: (NSNumber*) startDate
     endDate: (NSNumber*) endDate
     sdid: (NSString*) sdid
     field: (NSString*) field
@@ -180,8 +160,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACAggregatesHistogramResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -199,7 +178,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACFieldPresenceEnvelope*
 ///
--(NSNumber*) getFieldPresenceWithStartDate: (NSNumber*) startDate
+-(NSURLSessionTask*) getFieldPresenceWithStartDate: (NSNumber*) startDate
     endDate: (NSNumber*) endDate
     interval: (NSString*) interval
     sdid: (NSString*) sdid
@@ -298,8 +277,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACFieldPresenceEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -313,7 +291,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACNormalizedMessagesEnvelope*
 ///
--(NSNumber*) getLastNormalizedMessagesWithCount: (NSNumber*) count
+-(NSURLSessionTask*) getLastNormalizedMessagesWithCount: (NSNumber*) count
     sdids: (NSString*) sdids
     fieldPresence: (NSString*) fieldPresence
     completionHandler: (void (^)(ACNormalizedMessagesEnvelope* output, NSError* error)) handler {
@@ -371,8 +349,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACNormalizedMessagesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -388,7 +365,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACAggregatesResponse*
 ///
--(NSNumber*) getMessageAggregatesWithSdid: (NSString*) sdid
+-(NSURLSessionTask*) getMessageAggregatesWithSdid: (NSString*) sdid
     field: (NSString*) field
     startDate: (NSNumber*) startDate
     endDate: (NSNumber*) endDate
@@ -494,8 +471,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACAggregatesResponse*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -507,7 +483,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACSnapshotResponses*
 ///
--(NSNumber*) getMessageSnapshotsWithSdids: (NSString*) sdids
+-(NSURLSessionTask*) getMessageSnapshotsWithSdids: (NSString*) sdids
     includeTimestamp: (NSNumber*) includeTimestamp
     completionHandler: (void (^)(ACSnapshotResponses* output, NSError* error)) handler {
     // verify the required parameter 'sdids' is set
@@ -572,8 +548,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACSnapshotResponses*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -597,7 +572,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACNormalizedActionsEnvelope*
 ///
--(NSNumber*) getNormalizedActionsWithUid: (NSString*) uid
+-(NSURLSessionTask*) getNormalizedActionsWithUid: (NSString*) uid
     ddid: (NSString*) ddid
     mid: (NSString*) mid
     offset: (NSString*) offset
@@ -675,8 +650,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACNormalizedActionsEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -704,7 +678,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACNormalizedMessagesEnvelope*
 ///
--(NSNumber*) getNormalizedMessagesWithUid: (NSString*) uid
+-(NSURLSessionTask*) getNormalizedMessagesWithUid: (NSString*) uid
     sdid: (NSString*) sdid
     mid: (NSString*) mid
     fieldPresence: (NSString*) fieldPresence
@@ -790,8 +764,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACNormalizedMessagesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -801,7 +774,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACMessageIDEnvelope*
 ///
--(NSNumber*) sendActionsWithData: (ACActions*) data
+-(NSURLSessionTask*) sendActionsWithData: (ACActions*) data
     completionHandler: (void (^)(ACMessageIDEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'data' is set
     if (data == nil) {
@@ -860,8 +833,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACMessageIDEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -871,7 +843,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACMessageIDEnvelope*
 ///
--(NSNumber*) sendMessageWithData: (ACMessage*) data
+-(NSURLSessionTask*) sendMessageWithData: (ACMessage*) data
     completionHandler: (void (^)(ACMessageIDEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'data' is set
     if (data == nil) {
@@ -930,8 +902,7 @@ NSInteger kACMessagesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACMessageIDEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

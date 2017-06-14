@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 # **addDevice**
 ```objc
--(NSNumber*) addDeviceWithDevice: (ACDevice*) device
+-(NSURLSessionTask*) addDeviceWithDevice: (ACDevice*) device
         completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler;
 ```
 
@@ -26,7 +26,7 @@ Create a device
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 # **deleteDevice**
 ```objc
--(NSNumber*) deleteDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) deleteDeviceWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler;
 ```
 
@@ -81,7 +81,7 @@ Deletes a device
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 
 # **deleteDeviceToken**
 ```objc
--(NSNumber*) deleteDeviceTokenWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) deleteDeviceTokenWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACDeviceTokenEnvelope* output, NSError* error)) handler;
 ```
 
@@ -136,7 +136,7 @@ Deletes a device's token
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 # **getDevice**
 ```objc
--(NSNumber*) getDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) getDeviceWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler;
 ```
 
@@ -191,7 +191,7 @@ Retrieves a device
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -236,7 +236,7 @@ Name | Type | Description  | Notes
 
 # **getDevicePresence**
 ```objc
--(NSNumber*) getDevicePresenceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) getDevicePresenceWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACPresenceEnvelope* output, NSError* error)) handler;
 ```
 
@@ -246,7 +246,7 @@ Return the presence status of the given device along with the time it was last s
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 # **getDeviceToken**
 ```objc
--(NSNumber*) getDeviceTokenWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) getDeviceTokenWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACDeviceTokenEnvelope* output, NSError* error)) handler;
 ```
 
@@ -301,7 +301,7 @@ Retrieves a device's token
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -346,7 +346,7 @@ Name | Type | Description  | Notes
 
 # **updateDevice**
 ```objc
--(NSNumber*) updateDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) updateDeviceWithDeviceId: (NSString*) deviceId
     device: (ACDevice*) device
         completionHandler: (void (^)(ACDeviceEnvelope* output, NSError* error)) handler;
 ```
@@ -357,7 +357,7 @@ Updates a device
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 # **updateDeviceToken**
 ```objc
--(NSNumber*) updateDeviceTokenWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) updateDeviceTokenWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACDeviceTokenEnvelope* output, NSError* error)) handler;
 ```
 
@@ -415,7 +415,7 @@ Updates a device's token
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

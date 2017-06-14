@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"devicePropertiesEnabled": @"devicePropertiesEnabled", @"pmax": @"pmax", @"modifiedOn": @"modifiedOn", @"dtid": @"dtid", @"pmin": @"pmin", @"taskExpiresAfter": @"taskExpiresAfter", @"createdOn": @"createdOn" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"devicePropertiesEnabled": @"devicePropertiesEnabled", @"pmax": @"pmax", @"modifiedOn": @"modifiedOn", @"dtid": @"dtid", @"pmin": @"pmin", @"taskExpiresAfter": @"taskExpiresAfter", @"createdOn": @"createdOn" }];
 }
 
 /**

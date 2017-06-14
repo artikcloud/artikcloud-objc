@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 # **confirmUser**
 ```objc
--(NSNumber*) confirmUserWithRegistrationInfo: (ACDeviceRegConfirmUserRequest*) registrationInfo
+-(NSURLSessionTask*) confirmUserWithRegistrationInfo: (ACDeviceRegConfirmUserRequest*) registrationInfo
         completionHandler: (void (^)(ACDeviceRegConfirmUserResponseEnvelope* output, NSError* error)) handler;
 ```
 
@@ -21,7 +21,7 @@ This call updates the registration request issued earlier by associating it with
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 # **getRequestStatusForUser**
 ```objc
--(NSNumber*) getRequestStatusForUserWithRequestId: (NSString*) requestId
+-(NSURLSessionTask*) getRequestStatusForUserWithRequestId: (NSString*) requestId
         completionHandler: (void (^)(ACDeviceRegStatusResponseEnvelope* output, NSError* error)) handler;
 ```
 
@@ -76,7 +76,7 @@ This call checks the status of the request so users can poll and know when regis
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 # **unregisterDevice**
 ```objc
--(NSNumber*) unregisterDeviceWithDeviceId: (NSString*) deviceId
+-(NSURLSessionTask*) unregisterDeviceWithDeviceId: (NSString*) deviceId
         completionHandler: (void (^)(ACUnregisterDeviceResponseEnvelope* output, NSError* error)) handler;
 ```
 
@@ -131,7 +131,7 @@ This call clears any associations from the secure device registration.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

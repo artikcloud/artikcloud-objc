@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 # **createRule**
 ```objc
--(NSNumber*) createRuleWithRuleInfo: (ACRuleCreationInfo*) ruleInfo
+-(NSURLSessionTask*) createRuleWithRuleInfo: (ACRuleCreationInfo*) ruleInfo
     userId: (NSString*) userId
         completionHandler: (void (^)(ACRuleEnvelope* output, NSError* error)) handler;
 ```
@@ -23,7 +23,7 @@ Create a new Rule
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 # **deleteRule**
 ```objc
--(NSNumber*) deleteRuleWithRuleId: (NSString*) ruleId
+-(NSURLSessionTask*) deleteRuleWithRuleId: (NSString*) ruleId
         completionHandler: (void (^)(ACRuleEnvelope* output, NSError* error)) handler;
 ```
 
@@ -81,7 +81,7 @@ Delete a Rule
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 
 # **getRule**
 ```objc
--(NSNumber*) getRuleWithRuleId: (NSString*) ruleId
+-(NSURLSessionTask*) getRuleWithRuleId: (NSString*) ruleId
         completionHandler: (void (^)(ACRuleEnvelope* output, NSError* error)) handler;
 ```
 
@@ -136,7 +136,7 @@ Get a rule using the Rule ID
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 # **updateRule**
 ```objc
--(NSNumber*) updateRuleWithRuleId: (NSString*) ruleId
+-(NSURLSessionTask*) updateRuleWithRuleId: (NSString*) ruleId
     ruleInfo: (ACRuleUpdateInfo*) ruleInfo
         completionHandler: (void (^)(ACRuleEnvelope* output, NSError* error)) handler;
 ```
@@ -192,7 +192,7 @@ Update an existing Rule
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

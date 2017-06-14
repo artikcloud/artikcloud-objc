@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **getAvailableManifestVersions**
 ```objc
--(NSNumber*) getAvailableManifestVersionsWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getAvailableManifestVersionsWithDeviceTypeId: (NSString*) deviceTypeId
         completionHandler: (void (^)(ACManifestVersionsEnvelope* output, NSError* error)) handler;
 ```
 
@@ -24,7 +24,7 @@ Get a Device Type's available manifest versions
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 # **getDeviceType**
 ```objc
--(NSNumber*) getDeviceTypeWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getDeviceTypeWithDeviceTypeId: (NSString*) deviceTypeId
         completionHandler: (void (^)(ACDeviceTypeEnvelope* output, NSError* error)) handler;
 ```
 
@@ -79,7 +79,7 @@ Retrieves a Device Type
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 # **getDeviceTypes**
 ```objc
--(NSNumber*) getDeviceTypesWithName: (NSString*) name
+-(NSURLSessionTask*) getDeviceTypesWithName: (NSString*) name
     offset: (NSNumber*) offset
     count: (NSNumber*) count
     tags: (NSString*) tags
@@ -137,7 +137,7 @@ Retrieves Device Types
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 
 # **getDeviceTypesByApplication**
 ```objc
--(NSNumber*) getDeviceTypesByApplicationWithAppId: (NSString*) appId
+-(NSURLSessionTask*) getDeviceTypesByApplicationWithAppId: (NSString*) appId
     productInfo: (NSNumber*) productInfo
     count: (NSNumber*) count
     offset: (NSNumber*) offset
@@ -204,7 +204,7 @@ Get Device Types by Application
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -258,7 +258,7 @@ Name | Type | Description  | Notes
 
 # **getLatestManifestProperties**
 ```objc
--(NSNumber*) getLatestManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getLatestManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
         completionHandler: (void (^)(ACManifestPropertiesEnvelope* output, NSError* error)) handler;
 ```
 
@@ -268,7 +268,7 @@ Get a Device Type's manifest properties for the latest version.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 # **getManifestProperties**
 ```objc
--(NSNumber*) getManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
     version: (NSString*) version
         completionHandler: (void (^)(ACManifestPropertiesEnvelope* output, NSError* error)) handler;
 ```
@@ -324,7 +324,7 @@ Get a Device Type's manifest properties for a specific version.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

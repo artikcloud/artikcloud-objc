@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 # **createTasks**
 ```objc
--(NSNumber*) createTasksWithTaskPayload: (ACTaskRequest*) taskPayload
+-(NSURLSessionTask*) createTasksWithTaskPayload: (ACTaskRequest*) taskPayload
         completionHandler: (void (^)(ACTaskEnvelope* output, NSError* error)) handler;
 ```
 
@@ -33,7 +33,7 @@ Create a new task for one or more devices
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 # **deleteServerProperties**
 ```objc
--(NSNumber*) deleteServerPropertiesWithDid: (NSString*) did
+-(NSURLSessionTask*) deleteServerPropertiesWithDid: (NSString*) did
         completionHandler: (void (^)(ACMetadataEnvelope* output, NSError* error)) handler;
 ```
 
@@ -88,7 +88,7 @@ Deletes a device's properties.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 # **getAllByDid**
 ```objc
--(NSNumber*) getAllByDidWithDid: (NSString*) did
+-(NSURLSessionTask*) getAllByDidWithDid: (NSString*) did
     count: (NSNumber*) count
     offset: (NSNumber*) offset
     status: (NSString*) status
@@ -148,7 +148,7 @@ Returns the list of tasks for a particular device id with optional status filter
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 # **getDeviceTypesInfo**
 ```objc
--(NSNumber*) getDeviceTypesInfoWithDtid: (NSString*) dtid
+-(NSURLSessionTask*) getDeviceTypesInfoWithDtid: (NSString*) dtid
         completionHandler: (void (^)(ACDeviceTypesInfoEnvelope* output, NSError* error)) handler;
 ```
 
@@ -218,7 +218,7 @@ Read a device type device management information.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 
 # **getManifestProperties**
 ```objc
--(NSNumber*) getManifestPropertiesWithDtid: (NSString*) dtid
+-(NSURLSessionTask*) getManifestPropertiesWithDtid: (NSString*) dtid
         completionHandler: (void (^)(ACMetadataPropertiesEnvelope* output, NSError* error)) handler;
 ```
 
@@ -273,7 +273,7 @@ Get a device type's device management manifest properties
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 # **getProperties**
 ```objc
--(NSNumber*) getPropertiesWithDid: (NSString*) did
+-(NSURLSessionTask*) getPropertiesWithDid: (NSString*) did
     includeTimestamp: (NSNumber*) includeTimestamp
         completionHandler: (void (^)(ACMetadataEnvelope* output, NSError* error)) handler;
 ```
@@ -329,7 +329,7 @@ Read a device's properties.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 
 # **getStatuses**
 ```objc
--(NSNumber*) getStatusesWithTid: (NSString*) tid
+-(NSURLSessionTask*) getStatusesWithTid: (NSString*) tid
     count: (NSNumber*) count
     offset: (NSNumber*) offset
     status: (NSString*) status
@@ -391,7 +391,7 @@ Returns the details and status of a task id and the individual statuses of each 
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -448,7 +448,7 @@ Name | Type | Description  | Notes
 
 # **getStatusesHistory**
 ```objc
--(NSNumber*) getStatusesHistoryWithTid: (NSString*) tid
+-(NSURLSessionTask*) getStatusesHistoryWithTid: (NSString*) tid
     did: (NSString*) did
         completionHandler: (void (^)(ACTaskStatusesHistoryEnvelope* output, NSError* error)) handler;
 ```
@@ -459,7 +459,7 @@ Returns the history of the status changes for a specific task id, or for a speci
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -507,7 +507,7 @@ Name | Type | Description  | Notes
 
 # **getTaskByID**
 ```objc
--(NSNumber*) getTaskByIDWithTid: (NSString*) tid
+-(NSURLSessionTask*) getTaskByIDWithTid: (NSString*) tid
         completionHandler: (void (^)(ACTaskEnvelope* output, NSError* error)) handler;
 ```
 
@@ -517,7 +517,7 @@ Returns the details and global status of a specific task id.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -562,7 +562,7 @@ Name | Type | Description  | Notes
 
 # **getTasks**
 ```objc
--(NSNumber*) getTasksWithDtid: (NSString*) dtid
+-(NSURLSessionTask*) getTasksWithDtid: (NSString*) dtid
     count: (NSNumber*) count
     offset: (NSNumber*) offset
     status: (NSString*) status
@@ -577,7 +577,7 @@ Returns the all the tasks for a device type.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -637,7 +637,7 @@ Name | Type | Description  | Notes
 
 # **queryProperties**
 ```objc
--(NSNumber*) queryPropertiesWithDtid: (NSString*) dtid
+-(NSURLSessionTask*) queryPropertiesWithDtid: (NSString*) dtid
     count: (NSNumber*) count
     offset: (NSNumber*) offset
     filter: (NSString*) filter
@@ -651,7 +651,7 @@ Query device properties across devices.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -708,7 +708,7 @@ Name | Type | Description  | Notes
 
 # **updateDeviceTypesInfo**
 ```objc
--(NSNumber*) updateDeviceTypesInfoWithDtid: (NSString*) dtid
+-(NSURLSessionTask*) updateDeviceTypesInfoWithDtid: (NSString*) dtid
     deviceTypeInfo: (ACDeviceTypesInfo*) deviceTypeInfo
         completionHandler: (void (^)(ACDeviceTypesInfoEnvelope* output, NSError* error)) handler;
 ```
@@ -719,7 +719,7 @@ Updates a device type information
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -767,7 +767,7 @@ Name | Type | Description  | Notes
 
 # **updateServerProperties**
 ```objc
--(NSNumber*) updateServerPropertiesWithDid: (NSString*) did
+-(NSURLSessionTask*) updateServerPropertiesWithDid: (NSString*) did
     deviceProperties: (NSObject*) deviceProperties
         completionHandler: (void (^)(ACMetadataEnvelope* output, NSError* error)) handler;
 ```
@@ -778,7 +778,7 @@ Updates a device's server properties.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -826,7 +826,7 @@ Name | Type | Description  | Notes
 
 # **updateTask**
 ```objc
--(NSNumber*) updateTaskWithTid: (NSString*) tid
+-(NSURLSessionTask*) updateTaskWithTid: (NSString*) tid
     taskUpdateRequest: (ACTaskUpdateRequest*) taskUpdateRequest
         completionHandler: (void (^)(ACTaskUpdateResponse* output, NSError* error)) handler;
 ```
@@ -837,7 +837,7 @@ Updates a task for all devices - For now just allows changing the state to cance
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 
 # **updateTaskForDevice**
 ```objc
--(NSNumber*) updateTaskForDeviceWithTid: (NSString*) tid
+-(NSURLSessionTask*) updateTaskForDeviceWithTid: (NSString*) tid
     did: (NSString*) did
     deviceTaskUpdateRequest: (ACDeviceTaskUpdateRequest*) deviceTaskUpdateRequest
         completionHandler: (void (^)(ACDeviceTaskUpdateResponse* output, NSError* error)) handler;
@@ -897,7 +897,7 @@ Updates a task for a specific device - For now just allows changing the state to
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

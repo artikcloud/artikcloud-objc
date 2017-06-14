@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 # **getAggregatesHistogram**
 ```objc
--(NSNumber*) getAggregatesHistogramWithStartDate: (NSNumber*) startDate
+-(NSURLSessionTask*) getAggregatesHistogramWithStartDate: (NSNumber*) startDate
     endDate: (NSNumber*) endDate
     sdid: (NSString*) sdid
     field: (NSString*) field
@@ -31,7 +31,7 @@ Get Histogram on normalized messages.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 # **getFieldPresence**
 ```objc
--(NSNumber*) getFieldPresenceWithStartDate: (NSNumber*) startDate
+-(NSURLSessionTask*) getFieldPresenceWithStartDate: (NSNumber*) startDate
     endDate: (NSNumber*) endDate
     interval: (NSString*) interval
     sdid: (NSString*) sdid
@@ -102,7 +102,7 @@ Get normalized message presence.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 # **getLastNormalizedMessages**
 ```objc
--(NSNumber*) getLastNormalizedMessagesWithCount: (NSNumber*) count
+-(NSURLSessionTask*) getLastNormalizedMessagesWithCount: (NSNumber*) count
     sdids: (NSString*) sdids
     fieldPresence: (NSString*) fieldPresence
         completionHandler: (void (^)(ACNormalizedMessagesEnvelope* output, NSError* error)) handler;
@@ -171,7 +171,7 @@ Get last messages normalized.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 # **getMessageAggregates**
 ```objc
--(NSNumber*) getMessageAggregatesWithSdid: (NSString*) sdid
+-(NSURLSessionTask*) getMessageAggregatesWithSdid: (NSString*) sdid
     field: (NSString*) field
     startDate: (NSNumber*) startDate
     endDate: (NSNumber*) endDate
@@ -235,7 +235,7 @@ Get Aggregates on normalized messages.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 # **getMessageSnapshots**
 ```objc
--(NSNumber*) getMessageSnapshotsWithSdids: (NSString*) sdids
+-(NSURLSessionTask*) getMessageSnapshotsWithSdids: (NSString*) sdids
     includeTimestamp: (NSNumber*) includeTimestamp
         completionHandler: (void (^)(ACSnapshotResponses* output, NSError* error)) handler;
 ```
@@ -300,7 +300,7 @@ Get message snapshots.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 # **getNormalizedActions**
 ```objc
--(NSNumber*) getNormalizedActionsWithUid: (NSString*) uid
+-(NSURLSessionTask*) getNormalizedActionsWithUid: (NSString*) uid
     ddid: (NSString*) ddid
     mid: (NSString*) mid
     offset: (NSString*) offset
@@ -365,7 +365,7 @@ Get the actions normalized
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -431,7 +431,7 @@ Name | Type | Description  | Notes
 
 # **getNormalizedMessages**
 ```objc
--(NSNumber*) getNormalizedMessagesWithUid: (NSString*) uid
+-(NSURLSessionTask*) getNormalizedMessagesWithUid: (NSString*) uid
     sdid: (NSString*) sdid
     mid: (NSString*) mid
     fieldPresence: (NSString*) fieldPresence
@@ -450,7 +450,7 @@ Get the messages normalized
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -522,7 +522,7 @@ Name | Type | Description  | Notes
 
 # **sendActions**
 ```objc
--(NSNumber*) sendActionsWithData: (ACActions*) data
+-(NSURLSessionTask*) sendActionsWithData: (ACActions*) data
         completionHandler: (void (^)(ACMessageIDEnvelope* output, NSError* error)) handler;
 ```
 
@@ -532,7 +532,7 @@ Send Actions
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 
 # **sendMessage**
 ```objc
--(NSNumber*) sendMessageWithData: (ACMessage*) data
+-(NSURLSessionTask*) sendMessageWithData: (ACMessage*) data
         completionHandler: (void (^)(ACMessageIDEnvelope* output, NSError* error)) handler;
 ```
 
@@ -587,7 +587,7 @@ Send a message
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

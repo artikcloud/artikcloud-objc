@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 # **exportRequest**
 ```objc
--(NSNumber*) exportRequestWithExportRequestInfo: (ACExportRequestInfo*) exportRequestInfo
+-(NSURLSessionTask*) exportRequestWithExportRequestInfo: (ACExportRequestInfo*) exportRequestInfo
         completionHandler: (void (^)(ACExportRequestResponse* output, NSError* error)) handler;
 ```
 
@@ -22,7 +22,7 @@ Export normalized messages. The following input combinations are supported:<br/>
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 # **getExportHistory**
 ```objc
--(NSNumber*) getExportHistoryWithTrialId: (NSString*) trialId
+-(NSURLSessionTask*) getExportHistoryWithTrialId: (NSString*) trialId
     count: (NSNumber*) count
     offset: (NSNumber*) offset
         completionHandler: (void (^)(ACExportHistoryResponse* output, NSError* error)) handler;
@@ -79,7 +79,7 @@ Get the history of export requests.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 # **getExportResult**
 ```objc
--(NSNumber*) getExportResultWithExportId: (NSString*) exportId
+-(NSURLSessionTask*) getExportResultWithExportId: (NSString*) exportId
         completionHandler: (void (^)(NSString* output, NSError* error)) handler;
 ```
 
@@ -140,7 +140,7 @@ Retrieve result of the export query in tgz format. The tar file may contain one 
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -185,7 +185,7 @@ Name | Type | Description  | Notes
 
 # **getExportStatus**
 ```objc
--(NSNumber*) getExportStatusWithExportId: (NSString*) exportId
+-(NSURLSessionTask*) getExportStatusWithExportId: (NSString*) exportId
         completionHandler: (void (^)(ACExportStatusResponse* output, NSError* error)) handler;
 ```
 
@@ -195,7 +195,7 @@ Check status of the export query.
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

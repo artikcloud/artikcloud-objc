@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 # **getTagCategories**
 ```objc
--(NSNumber*) getTagCategoriesWithCompletionHandler: 
+-(NSURLSessionTask*) getTagCategoriesWithCompletionHandler: 
         (void (^)(ACTagsEnvelope* output, NSError* error)) handler;
 ```
 
@@ -21,7 +21,7 @@ Get all tags marked as categories
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 
 # **getTagSuggestions**
 ```objc
--(NSNumber*) getTagSuggestionsWithEntityType: (NSString*) entityType
+-(NSURLSessionTask*) getTagSuggestionsWithEntityType: (NSString*) entityType
     tags: (NSString*) tags
     name: (NSString*) name
     count: (NSNumber*) count
@@ -75,7 +75,7 @@ Get tag suggestions for applications, device types that have been most used with
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 
 # **getTagsByCategories**
 ```objc
--(NSNumber*) getTagsByCategoriesWithCategories: (NSString*) categories
+-(NSURLSessionTask*) getTagsByCategoriesWithCategories: (NSString*) categories
         completionHandler: (void (^)(ACTagsEnvelope* output, NSError* error)) handler;
 ```
 
@@ -139,7 +139,7 @@ Get all tags related to the list of categories
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];

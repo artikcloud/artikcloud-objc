@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"sdid": @"sdid", @"fieldPresence": @"fieldPresence", @"startDate": @"startDate", @"endDate": @"endDate", @"interval": @"interval", @"size": @"size", @"data": @"data" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"sdid": @"sdid", @"fieldPresence": @"fieldPresence", @"startDate": @"startDate", @"endDate": @"endDate", @"interval": @"interval", @"size": @"size", @"data": @"data" }];
 }
 
 /**

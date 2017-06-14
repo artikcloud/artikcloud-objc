@@ -36,7 +36,7 @@ Import the following:
 
 ```objc
 #import <ArtikCloud/ACApiClient.h>
-#import <ArtikCloud/ACConfiguration.h>
+#import <ArtikCloud/ACDefaultConfiguration.h>
 // load models
 #import <ArtikCloud/ACAckEnvelope.h>
 #import <ArtikCloud/ACAcknowledgement.h>
@@ -63,14 +63,32 @@ Import the following:
 #import <ArtikCloud/ACDeviceRegConfirmUserResponseEnvelope.h>
 #import <ArtikCloud/ACDeviceRegStatusResponse.h>
 #import <ArtikCloud/ACDeviceRegStatusResponseEnvelope.h>
+#import <ArtikCloud/ACDeviceShareInfo.h>
+#import <ArtikCloud/ACDeviceSharing.h>
+#import <ArtikCloud/ACDeviceSharingArray.h>
+#import <ArtikCloud/ACDeviceSharingEnvelope.h>
+#import <ArtikCloud/ACDeviceSharingId.h>
+#import <ArtikCloud/ACDeviceStatus.h>
+#import <ArtikCloud/ACDeviceStatusBatch.h>
+#import <ArtikCloud/ACDeviceStatusData.h>
+#import <ArtikCloud/ACDeviceStatusPut.h>
+#import <ArtikCloud/ACDeviceStatusPutData.h>
+#import <ArtikCloud/ACDeviceTask.h>
+#import <ArtikCloud/ACDeviceTaskUpdateRequest.h>
+#import <ArtikCloud/ACDeviceTaskUpdateResponse.h>
 #import <ArtikCloud/ACDeviceToken.h>
 #import <ArtikCloud/ACDeviceTokenEnvelope.h>
 #import <ArtikCloud/ACDeviceType.h>
 #import <ArtikCloud/ACDeviceTypeArray.h>
 #import <ArtikCloud/ACDeviceTypeEnvelope.h>
+#import <ArtikCloud/ACDeviceTypeInfo.h>
+#import <ArtikCloud/ACDeviceTypeInfoEnvelope.h>
 #import <ArtikCloud/ACDeviceTypesEnvelope.h>
+#import <ArtikCloud/ACDeviceTypesInfo.h>
+#import <ArtikCloud/ACDeviceTypesInfoEnvelope.h>
 #import <ArtikCloud/ACDevicesEnvelope.h>
 #import <ArtikCloud/ACErrorEnvelope.h>
+#import <ArtikCloud/ACEventFeedData.h>
 #import <ArtikCloud/ACExportData.h>
 #import <ArtikCloud/ACExportDataArray.h>
 #import <ArtikCloud/ACExportHistoryResponse.h>
@@ -95,11 +113,17 @@ Import the following:
 #import <ArtikCloud/ACMessageIDEnvelope.h>
 #import <ArtikCloud/ACMessageIn.h>
 #import <ArtikCloud/ACMessageOut.h>
+#import <ArtikCloud/ACMetadataEnvelope.h>
+#import <ArtikCloud/ACMetadataPropertiesEnvelope.h>
+#import <ArtikCloud/ACMetadataQueryEnvelope.h>
 #import <ArtikCloud/ACNonEmptyString.h>
 #import <ArtikCloud/ACNormalizedAction.h>
 #import <ArtikCloud/ACNormalizedActionsEnvelope.h>
 #import <ArtikCloud/ACNormalizedMessage.h>
 #import <ArtikCloud/ACNormalizedMessagesEnvelope.h>
+#import <ArtikCloud/ACNotifMessage.h>
+#import <ArtikCloud/ACNotifMessageArray.h>
+#import <ArtikCloud/ACNotifMessagesResponse.h>
 #import <ArtikCloud/ACOutputRule.h>
 #import <ArtikCloud/ACPresenceEnvelope.h>
 #import <ArtikCloud/ACPresenceModel.h>
@@ -116,9 +140,33 @@ Import the following:
 #import <ArtikCloud/ACSnapshotResponse.h>
 #import <ArtikCloud/ACSnapshotResponses.h>
 #import <ArtikCloud/ACSnapshotsResponseEnvelope.h>
+#import <ArtikCloud/ACSubscription.h>
+#import <ArtikCloud/ACSubscriptionArray.h>
+#import <ArtikCloud/ACSubscriptionEnvelope.h>
+#import <ArtikCloud/ACSubscriptionInfo.h>
+#import <ArtikCloud/ACSubscriptionsEnvelope.h>
 #import <ArtikCloud/ACTag.h>
 #import <ArtikCloud/ACTagArray.h>
 #import <ArtikCloud/ACTagsEnvelope.h>
+#import <ArtikCloud/ACTask.h>
+#import <ArtikCloud/ACTaskByDid.h>
+#import <ArtikCloud/ACTaskByDidList.h>
+#import <ArtikCloud/ACTaskByDidListEnvelope.h>
+#import <ArtikCloud/ACTaskEnvelope.h>
+#import <ArtikCloud/ACTaskHistory.h>
+#import <ArtikCloud/ACTaskHistoryList.h>
+#import <ArtikCloud/ACTaskList.h>
+#import <ArtikCloud/ACTaskListEnvelope.h>
+#import <ArtikCloud/ACTaskParameters.h>
+#import <ArtikCloud/ACTaskRequest.h>
+#import <ArtikCloud/ACTaskStatus.h>
+#import <ArtikCloud/ACTaskStatusCounts.h>
+#import <ArtikCloud/ACTaskStatuses.h>
+#import <ArtikCloud/ACTaskStatusesEnvelope.h>
+#import <ArtikCloud/ACTaskStatusesHistoryEnvelope.h>
+#import <ArtikCloud/ACTaskUpdateRequest.h>
+#import <ArtikCloud/ACTaskUpdateResponse.h>
+#import <ArtikCloud/ACTasksStatusCounts.h>
 #import <ArtikCloud/ACToken.h>
 #import <ArtikCloud/ACTokenInfo.h>
 #import <ArtikCloud/ACTokenInfoSuccessResponse.h>
@@ -126,16 +174,22 @@ Import the following:
 #import <ArtikCloud/ACTokenResponse.h>
 #import <ArtikCloud/ACUnregisterDeviceResponse.h>
 #import <ArtikCloud/ACUnregisterDeviceResponseEnvelope.h>
+#import <ArtikCloud/ACUpdateParameters.h>
 #import <ArtikCloud/ACUser.h>
 #import <ArtikCloud/ACUserEnvelope.h>
+#import <ArtikCloud/ACValidationCallbackInfo.h>
 #import <ArtikCloud/ACWebSocketError.h>
 // load API classes for accessing endpoints
 #import <ArtikCloud/ACDeviceTypesApi.h>
 #import <ArtikCloud/ACDevicesApi.h>
+#import <ArtikCloud/ACDevicesManagementApi.h>
+#import <ArtikCloud/ACDevicessharesApi.h>
+#import <ArtikCloud/ACDevicestatusApi.h>
 #import <ArtikCloud/ACExportApi.h>
 #import <ArtikCloud/ACMessagesApi.h>
 #import <ArtikCloud/ACRegistrationsApi.h>
 #import <ArtikCloud/ACRulesApi.h>
+#import <ArtikCloud/ACSubscriptionsApi.h>
 #import <ArtikCloud/ACTagsApi.h>
 #import <ArtikCloud/ACTokensApi.h>
 #import <ArtikCloud/ACUsersApi.h>
@@ -184,6 +238,7 @@ Class | Method | HTTP request | Description
 *ACDeviceTypesApi* | [**getAvailableManifestVersions**](docs/ACDeviceTypesApi.md#getavailablemanifestversions) | **GET** /devicetypes/{deviceTypeId}/availablemanifestversions | Get Available Manifest Versions
 *ACDeviceTypesApi* | [**getDeviceType**](docs/ACDeviceTypesApi.md#getdevicetype) | **GET** /devicetypes/{deviceTypeId} | Get Device Type
 *ACDeviceTypesApi* | [**getDeviceTypes**](docs/ACDeviceTypesApi.md#getdevicetypes) | **GET** /devicetypes | Get Device Types
+*ACDeviceTypesApi* | [**getDeviceTypesByApplication**](docs/ACDeviceTypesApi.md#getdevicetypesbyapplication) | **GET** /applications/{appId}/devicetypes | Get Device Types by Application
 *ACDeviceTypesApi* | [**getLatestManifestProperties**](docs/ACDeviceTypesApi.md#getlatestmanifestproperties) | **GET** /devicetypes/{deviceTypeId}/manifests/latest/properties | Get Latest Manifest Properties
 *ACDeviceTypesApi* | [**getManifestProperties**](docs/ACDeviceTypesApi.md#getmanifestproperties) | **GET** /devicetypes/{deviceTypeId}/manifests/{version}/properties | Get manifest properties
 *ACDevicesApi* | [**addDevice**](docs/ACDevicesApi.md#adddevice) | **POST** /devices | Add Device
@@ -194,6 +249,28 @@ Class | Method | HTTP request | Description
 *ACDevicesApi* | [**getDeviceToken**](docs/ACDevicesApi.md#getdevicetoken) | **GET** /devices/{deviceId}/tokens | Get Device Token
 *ACDevicesApi* | [**updateDevice**](docs/ACDevicesApi.md#updatedevice) | **PUT** /devices/{deviceId} | Update Device
 *ACDevicesApi* | [**updateDeviceToken**](docs/ACDevicesApi.md#updatedevicetoken) | **PUT** /devices/{deviceId}/tokens | Update Device Token
+*ACDevicesManagementApi* | [**createTasks**](docs/ACDevicesManagementApi.md#createtasks) | **POST** /devicemgmt/tasks | Create a new task for one or more devices
+*ACDevicesManagementApi* | [**deleteServerProperties**](docs/ACDevicesManagementApi.md#deleteserverproperties) | **DELETE** /devicemgmt/devices/{did}/serverproperties | Deletes a device&#39;s properties.
+*ACDevicesManagementApi* | [**getAllByDid**](docs/ACDevicesManagementApi.md#getallbydid) | **GET** /devicemgmt/devices/{did}/tasks | Returns the list of tasks for a particular device id with optional status filter.
+*ACDevicesManagementApi* | [**getDeviceTypesInfo**](docs/ACDevicesManagementApi.md#getdevicetypesinfo) | **GET** /devicemgmt/devicetypes/{dtid} | Read a device type device management information.
+*ACDevicesManagementApi* | [**getManifestProperties**](docs/ACDevicesManagementApi.md#getmanifestproperties) | **GET** /devicemgmt/devicetypes/{dtid}/manifest/properties | Get a device type&#39;s device management manifest properties
+*ACDevicesManagementApi* | [**getProperties**](docs/ACDevicesManagementApi.md#getproperties) | **GET** /devicemgmt/devices/{did}/properties | Read a device&#39;s properties.
+*ACDevicesManagementApi* | [**getStatuses**](docs/ACDevicesManagementApi.md#getstatuses) | **GET** /devicemgmt/tasks/{tid}/statuses | Returns the details and status of a task id and the individual statuses of each device id in the list.
+*ACDevicesManagementApi* | [**getStatusesHistory**](docs/ACDevicesManagementApi.md#getstatuseshistory) | **GET** /devicemgmt/tasks/{tid}/statuses/history | Returns the history of the status changes for a specific task id, or for a specific device id in that task.
+*ACDevicesManagementApi* | [**getTaskByID**](docs/ACDevicesManagementApi.md#gettaskbyid) | **GET** /devicemgmt/tasks/{tid} | Returns the details and global status of a specific task id.
+*ACDevicesManagementApi* | [**getTasks**](docs/ACDevicesManagementApi.md#gettasks) | **GET** /devicemgmt/tasks | Returns the all the tasks for a device type.
+*ACDevicesManagementApi* | [**queryProperties**](docs/ACDevicesManagementApi.md#queryproperties) | **GET** /devicemgmt/devices/properties | Query device properties across devices.
+*ACDevicesManagementApi* | [**updateDeviceTypesInfo**](docs/ACDevicesManagementApi.md#updatedevicetypesinfo) | **PUT** /devicemgmt/devicetypes/{dtid} | Updates a device type information
+*ACDevicesManagementApi* | [**updateServerProperties**](docs/ACDevicesManagementApi.md#updateserverproperties) | **POST** /devicemgmt/devices/{did}/serverproperties | Updates a device&#39;s server properties.
+*ACDevicesManagementApi* | [**updateTask**](docs/ACDevicesManagementApi.md#updatetask) | **PUT** /devicemgmt/tasks/{tid} | Updates a task for all devices - For now just allows changing the state to cancelled.
+*ACDevicesManagementApi* | [**updateTaskForDevice**](docs/ACDevicesManagementApi.md#updatetaskfordevice) | **PUT** /devicemgmt/tasks/{tid}/devices/{did} | Updates a task for a specific device - For now just allows changing the state to cancelled.
+*ACDevicessharesApi* | [**createShareForDevice**](docs/ACDevicessharesApi.md#createsharefordevice) | **POST** in/api/devices/{deviceId}/shares | Share a device 
+*ACDevicessharesApi* | [**deleteSharingForDevice**](docs/ACDevicessharesApi.md#deletesharingfordevice) | **DELETE** in/api/devices/{deviceId}/shares/{shareId} | Delete specific share of the given device id
+*ACDevicessharesApi* | [**getAllSharesForDevice**](docs/ACDevicessharesApi.md#getallsharesfordevice) | **GET** in/api/devices/{deviceId}/shares | List all shares for the given device id
+*ACDevicessharesApi* | [**getSharingForDevice**](docs/ACDevicessharesApi.md#getsharingfordevice) | **GET** in/api/devices/{deviceId}/shares/{shareId} | Get specific share of the given device id
+*ACDevicestatusApi* | [**getDeviceStatus**](docs/ACDevicestatusApi.md#getdevicestatus) | **GET** /devices/{deviceId}/status | Get Device Status
+*ACDevicestatusApi* | [**getDevicesStatus**](docs/ACDevicestatusApi.md#getdevicesstatus) | **GET** /devices/status | Get Devices Status
+*ACDevicestatusApi* | [**putDeviceStatus**](docs/ACDevicestatusApi.md#putdevicestatus) | **PUT** /devices/{deviceId}/status | Update Device Status
 *ACExportApi* | [**exportRequest**](docs/ACExportApi.md#exportrequest) | **POST** /messages/export | Create Export Request
 *ACExportApi* | [**getExportHistory**](docs/ACExportApi.md#getexporthistory) | **GET** /messages/export/history | Get Export History
 *ACExportApi* | [**getExportResult**](docs/ACExportApi.md#getexportresult) | **GET** /messages/export/{exportId}/result | Get Export Result
@@ -214,6 +291,12 @@ Class | Method | HTTP request | Description
 *ACRulesApi* | [**deleteRule**](docs/ACRulesApi.md#deleterule) | **DELETE** /rules/{ruleId} | Delete Rule
 *ACRulesApi* | [**getRule**](docs/ACRulesApi.md#getrule) | **GET** /rules/{ruleId} | Get Rule
 *ACRulesApi* | [**updateRule**](docs/ACRulesApi.md#updaterule) | **PUT** /rules/{ruleId} | Update Rule
+*ACSubscriptionsApi* | [**createSubscription**](docs/ACSubscriptionsApi.md#createsubscription) | **POST** /subscriptions | Create Subscription
+*ACSubscriptionsApi* | [**deleteSubscription**](docs/ACSubscriptionsApi.md#deletesubscription) | **DELETE** /subscriptions/{subId} | Delete Subscription
+*ACSubscriptionsApi* | [**getAllSubscriptions**](docs/ACSubscriptionsApi.md#getallsubscriptions) | **GET** /subscriptions | Get All Subscriptions
+*ACSubscriptionsApi* | [**getMessages**](docs/ACSubscriptionsApi.md#getmessages) | **GET** /notifications/{notifId}/messages | Get Messages
+*ACSubscriptionsApi* | [**getSubscription**](docs/ACSubscriptionsApi.md#getsubscription) | **GET** /subscriptions/{subId} | Get Subscription
+*ACSubscriptionsApi* | [**validateSubscription**](docs/ACSubscriptionsApi.md#validatesubscription) | **POST** /subscriptions/{subId}/validate | Validate Subscription
 *ACTagsApi* | [**getTagCategories**](docs/ACTagsApi.md#gettagcategories) | **GET** /tags/categories | Get all categories
 *ACTagsApi* | [**getTagSuggestions**](docs/ACTagsApi.md#gettagsuggestions) | **GET** /tags/suggestions | Get tag suggestions
 *ACTagsApi* | [**getTagsByCategories**](docs/ACTagsApi.md#gettagsbycategories) | **GET** /tags | Get all tags of categories
@@ -227,6 +310,7 @@ Class | Method | HTTP request | Description
 *ACUsersApi* | [**getUserDevices**](docs/ACUsersApi.md#getuserdevices) | **GET** /users/{userId}/devices | Get User Devices
 *ACUsersApi* | [**getUserProperties**](docs/ACUsersApi.md#getuserproperties) | **GET** /users/{userId}/properties | Get User application properties
 *ACUsersApi* | [**getUserRules**](docs/ACUsersApi.md#getuserrules) | **GET** /users/{userId}/rules | Get User Rules
+*ACUsersApi* | [**listAllSharesForUser**](docs/ACUsersApi.md#listallsharesforuser) | **GET** in/api/users/{userId}/shares | Get User shares
 *ACUsersApi* | [**updateUserProperties**](docs/ACUsersApi.md#updateuserproperties) | **PUT** /users/{userId}/properties | Update User Application Properties
 
 
@@ -257,14 +341,32 @@ Class | Method | HTTP request | Description
  - [ACDeviceRegConfirmUserResponseEnvelope](docs/ACDeviceRegConfirmUserResponseEnvelope.md)
  - [ACDeviceRegStatusResponse](docs/ACDeviceRegStatusResponse.md)
  - [ACDeviceRegStatusResponseEnvelope](docs/ACDeviceRegStatusResponseEnvelope.md)
+ - [ACDeviceShareInfo](docs/ACDeviceShareInfo.md)
+ - [ACDeviceSharing](docs/ACDeviceSharing.md)
+ - [ACDeviceSharingArray](docs/ACDeviceSharingArray.md)
+ - [ACDeviceSharingEnvelope](docs/ACDeviceSharingEnvelope.md)
+ - [ACDeviceSharingId](docs/ACDeviceSharingId.md)
+ - [ACDeviceStatus](docs/ACDeviceStatus.md)
+ - [ACDeviceStatusBatch](docs/ACDeviceStatusBatch.md)
+ - [ACDeviceStatusData](docs/ACDeviceStatusData.md)
+ - [ACDeviceStatusPut](docs/ACDeviceStatusPut.md)
+ - [ACDeviceStatusPutData](docs/ACDeviceStatusPutData.md)
+ - [ACDeviceTask](docs/ACDeviceTask.md)
+ - [ACDeviceTaskUpdateRequest](docs/ACDeviceTaskUpdateRequest.md)
+ - [ACDeviceTaskUpdateResponse](docs/ACDeviceTaskUpdateResponse.md)
  - [ACDeviceToken](docs/ACDeviceToken.md)
  - [ACDeviceTokenEnvelope](docs/ACDeviceTokenEnvelope.md)
  - [ACDeviceType](docs/ACDeviceType.md)
  - [ACDeviceTypeArray](docs/ACDeviceTypeArray.md)
  - [ACDeviceTypeEnvelope](docs/ACDeviceTypeEnvelope.md)
+ - [ACDeviceTypeInfo](docs/ACDeviceTypeInfo.md)
+ - [ACDeviceTypeInfoEnvelope](docs/ACDeviceTypeInfoEnvelope.md)
  - [ACDeviceTypesEnvelope](docs/ACDeviceTypesEnvelope.md)
+ - [ACDeviceTypesInfo](docs/ACDeviceTypesInfo.md)
+ - [ACDeviceTypesInfoEnvelope](docs/ACDeviceTypesInfoEnvelope.md)
  - [ACDevicesEnvelope](docs/ACDevicesEnvelope.md)
  - [ACErrorEnvelope](docs/ACErrorEnvelope.md)
+ - [ACEventFeedData](docs/ACEventFeedData.md)
  - [ACExportData](docs/ACExportData.md)
  - [ACExportDataArray](docs/ACExportDataArray.md)
  - [ACExportHistoryResponse](docs/ACExportHistoryResponse.md)
@@ -289,11 +391,17 @@ Class | Method | HTTP request | Description
  - [ACMessageIDEnvelope](docs/ACMessageIDEnvelope.md)
  - [ACMessageIn](docs/ACMessageIn.md)
  - [ACMessageOut](docs/ACMessageOut.md)
+ - [ACMetadataEnvelope](docs/ACMetadataEnvelope.md)
+ - [ACMetadataPropertiesEnvelope](docs/ACMetadataPropertiesEnvelope.md)
+ - [ACMetadataQueryEnvelope](docs/ACMetadataQueryEnvelope.md)
  - [ACNonEmptyString](docs/ACNonEmptyString.md)
  - [ACNormalizedAction](docs/ACNormalizedAction.md)
  - [ACNormalizedActionsEnvelope](docs/ACNormalizedActionsEnvelope.md)
  - [ACNormalizedMessage](docs/ACNormalizedMessage.md)
  - [ACNormalizedMessagesEnvelope](docs/ACNormalizedMessagesEnvelope.md)
+ - [ACNotifMessage](docs/ACNotifMessage.md)
+ - [ACNotifMessageArray](docs/ACNotifMessageArray.md)
+ - [ACNotifMessagesResponse](docs/ACNotifMessagesResponse.md)
  - [ACOutputRule](docs/ACOutputRule.md)
  - [ACPresenceEnvelope](docs/ACPresenceEnvelope.md)
  - [ACPresenceModel](docs/ACPresenceModel.md)
@@ -310,9 +418,33 @@ Class | Method | HTTP request | Description
  - [ACSnapshotResponse](docs/ACSnapshotResponse.md)
  - [ACSnapshotResponses](docs/ACSnapshotResponses.md)
  - [ACSnapshotsResponseEnvelope](docs/ACSnapshotsResponseEnvelope.md)
+ - [ACSubscription](docs/ACSubscription.md)
+ - [ACSubscriptionArray](docs/ACSubscriptionArray.md)
+ - [ACSubscriptionEnvelope](docs/ACSubscriptionEnvelope.md)
+ - [ACSubscriptionInfo](docs/ACSubscriptionInfo.md)
+ - [ACSubscriptionsEnvelope](docs/ACSubscriptionsEnvelope.md)
  - [ACTag](docs/ACTag.md)
  - [ACTagArray](docs/ACTagArray.md)
  - [ACTagsEnvelope](docs/ACTagsEnvelope.md)
+ - [ACTask](docs/ACTask.md)
+ - [ACTaskByDid](docs/ACTaskByDid.md)
+ - [ACTaskByDidList](docs/ACTaskByDidList.md)
+ - [ACTaskByDidListEnvelope](docs/ACTaskByDidListEnvelope.md)
+ - [ACTaskEnvelope](docs/ACTaskEnvelope.md)
+ - [ACTaskHistory](docs/ACTaskHistory.md)
+ - [ACTaskHistoryList](docs/ACTaskHistoryList.md)
+ - [ACTaskList](docs/ACTaskList.md)
+ - [ACTaskListEnvelope](docs/ACTaskListEnvelope.md)
+ - [ACTaskParameters](docs/ACTaskParameters.md)
+ - [ACTaskRequest](docs/ACTaskRequest.md)
+ - [ACTaskStatus](docs/ACTaskStatus.md)
+ - [ACTaskStatusCounts](docs/ACTaskStatusCounts.md)
+ - [ACTaskStatuses](docs/ACTaskStatuses.md)
+ - [ACTaskStatusesEnvelope](docs/ACTaskStatusesEnvelope.md)
+ - [ACTaskStatusesHistoryEnvelope](docs/ACTaskStatusesHistoryEnvelope.md)
+ - [ACTaskUpdateRequest](docs/ACTaskUpdateRequest.md)
+ - [ACTaskUpdateResponse](docs/ACTaskUpdateResponse.md)
+ - [ACTasksStatusCounts](docs/ACTasksStatusCounts.md)
  - [ACToken](docs/ACToken.md)
  - [ACTokenInfo](docs/ACTokenInfo.md)
  - [ACTokenInfoSuccessResponse](docs/ACTokenInfoSuccessResponse.md)
@@ -320,9 +452,12 @@ Class | Method | HTTP request | Description
  - [ACTokenResponse](docs/ACTokenResponse.md)
  - [ACUnregisterDeviceResponse](docs/ACUnregisterDeviceResponse.md)
  - [ACUnregisterDeviceResponseEnvelope](docs/ACUnregisterDeviceResponseEnvelope.md)
+ - [ACUpdateParameters](docs/ACUpdateParameters.md)
  - [ACUser](docs/ACUser.md)
  - [ACUserEnvelope](docs/ACUserEnvelope.md)
+ - [ACValidationCallbackInfo](docs/ACValidationCallbackInfo.md)
  - [ACWebSocketError](docs/ACWebSocketError.md)
+
 
 
 ## Documentation For Authorization
@@ -362,4 +497,4 @@ Licence and Copyright
 
 Licensed under the Apache License. See [LICENSE](https://github.com/artikcloud/artikcloud-swift/blob/master/LICENSE).
 
-Copyright (c) 2016 Samsung Electronics Co., Ltd.
+Copyright (c) 2017 Samsung Electronics Co., Ltd.

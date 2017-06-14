@@ -1,14 +1,15 @@
 #import "ACDeviceTypesApi.h"
 #import "ACQueryParamCollection.h"
-#import "ACManifestVersionsEnvelope.h"
+#import "ACApiClient.h"
 #import "ACDeviceTypeEnvelope.h"
 #import "ACDeviceTypesEnvelope.h"
 #import "ACManifestPropertiesEnvelope.h"
+#import "ACManifestVersionsEnvelope.h"
 
 
 @interface ACDeviceTypesApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -22,52 +23,31 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        ACConfiguration *config = [ACConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[ACApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[ACApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(ACApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(ACApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static ACDeviceTypesApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [ACApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -79,7 +59,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACManifestVersionsEnvelope*
 ///
--(NSNumber*) getAvailableManifestVersionsWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getAvailableManifestVersionsWithDeviceTypeId: (NSString*) deviceTypeId
     completionHandler: (void (^)(ACManifestVersionsEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceTypeId' is set
     if (deviceTypeId == nil) {
@@ -140,8 +120,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACManifestVersionsEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -151,7 +130,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTypeEnvelope*
 ///
--(NSNumber*) getDeviceTypeWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getDeviceTypeWithDeviceTypeId: (NSString*) deviceTypeId
     completionHandler: (void (^)(ACDeviceTypeEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceTypeId' is set
     if (deviceTypeId == nil) {
@@ -212,8 +191,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTypeEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -229,7 +207,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTypesEnvelope*
 ///
--(NSNumber*) getDeviceTypesWithName: (NSString*) name
+-(NSURLSessionTask*) getDeviceTypesWithName: (NSString*) name
     offset: (NSNumber*) offset
     count: (NSNumber*) count
     tags: (NSString*) tags
@@ -302,8 +280,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTypesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -319,7 +296,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACDeviceTypesEnvelope*
 ///
--(NSNumber*) getDeviceTypesByApplicationWithAppId: (NSString*) appId
+-(NSURLSessionTask*) getDeviceTypesByApplicationWithAppId: (NSString*) appId
     productInfo: (NSNumber*) productInfo
     count: (NSNumber*) count
     offset: (NSNumber*) offset
@@ -392,8 +369,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACDeviceTypesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -403,7 +379,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACManifestPropertiesEnvelope*
 ///
--(NSNumber*) getLatestManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getLatestManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
     completionHandler: (void (^)(ACManifestPropertiesEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceTypeId' is set
     if (deviceTypeId == nil) {
@@ -464,8 +440,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACManifestPropertiesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
@@ -477,7 +452,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
 ///
 ///  @returns ACManifestPropertiesEnvelope*
 ///
--(NSNumber*) getManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
+-(NSURLSessionTask*) getManifestPropertiesWithDeviceTypeId: (NSString*) deviceTypeId
     version: (NSString*) version
     completionHandler: (void (^)(ACManifestPropertiesEnvelope* output, NSError* error)) handler {
     // verify the required parameter 'deviceTypeId' is set
@@ -553,8 +528,7 @@ NSInteger kACDeviceTypesApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((ACManifestPropertiesEnvelope*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 

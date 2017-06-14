@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 # **checkToken**
 ```objc
--(NSNumber*) checkTokenWithTokenInfo: (ACTokenRequest*) tokenInfo
+-(NSURLSessionTask*) checkTokenWithTokenInfo: (ACTokenRequest*) tokenInfo
         completionHandler: (void (^)(ACCheckTokenResponse* output, NSError* error)) handler;
 ```
 
@@ -21,7 +21,7 @@ Check Token
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 # **refreshToken**
 ```objc
--(NSNumber*) refreshTokenWithGrantType: (NSString*) grantType
+-(NSURLSessionTask*) refreshTokenWithGrantType: (NSString*) grantType
     refreshToken: (NSString*) refreshToken
         completionHandler: (void (^)(ACRefreshTokenResponse* output, NSError* error)) handler;
 ```
@@ -77,7 +77,7 @@ Refresh Token
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 
 # **tokenInfo**
 ```objc
--(NSNumber*) tokenInfoWithCompletionHandler: 
+-(NSURLSessionTask*) tokenInfoWithCompletionHandler: 
         (void (^)(ACTokenInfoSuccessResponse* output, NSError* error)) handler;
 ```
 
@@ -135,7 +135,7 @@ Returns the Token Information
 
 ### Example 
 ```objc
-ACConfiguration *apiConfig = [ACConfiguration sharedConfig];
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 
 // Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
 [apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
