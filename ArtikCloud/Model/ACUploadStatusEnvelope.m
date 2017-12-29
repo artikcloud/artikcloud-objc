@@ -1,6 +1,6 @@
-#import "ACMetadataRequest.h"
+#import "ACUploadStatusEnvelope.h"
 
-@implementation ACMetadataRequest
+@implementation ACUploadStatusEnvelope
 
 - (instancetype)init {
   self = [super init];
@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{  }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"status": @"status" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[];
+  NSArray *optionalProperties = @[@"status"];
   return [optionalProperties containsObject:propertyName];
 }
 

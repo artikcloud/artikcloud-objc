@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **rule** | **NSDictionary&lt;NSString*, NSObject*&gt;*** |  | [optional] 
 **uid** | **NSString*** |  | [optional] 
 **warning** | [**ACRuleWarningOutput***](ACRuleWarningOutput.md) |  | [optional] 
+**owner** | **NSString*** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -75,8 +75,8 @@ static NSString * AC__fileNameForResponse(NSURLResponse *response) {
         _downloadTaskResponseTypes = @[@"NSURL*", @"NSURL"];
 
         AFHTTPRequestSerializer* afhttpRequestSerializer = [AFHTTPRequestSerializer serializer];
-        SWGJSONRequestSerializer * swgjsonRequestSerializer = [SWGJSONRequestSerializer serializer];
-        _requestSerializerForContentType = @{kSWGApplicationJSONType : swgjsonRequestSerializer,
+        ACJSONRequestSerializer * acjsonRequestSerializer = [ACJSONRequestSerializer serializer];
+        _requestSerializerForContentType = @{kACApplicationJSONType : acjsonRequestSerializer,
             @"application/x-www-form-urlencoded": afhttpRequestSerializer,
             @"multipart/form-data": afhttpRequestSerializer
         };
@@ -157,7 +157,7 @@ static NSString * AC__fileNameForResponse(NSURLResponse *response) {
 
     AFHTTPRequestSerializer <AFURLRequestSerialization> * requestSerializer = [self requestSerializerForRequestContentType:requestContentType];
 
-    __weak id<SWGSanitizer> sanitizer = self.sanitizer;
+    __weak id<ACSanitizer> sanitizer = self.sanitizer;
 
     // sanitize parameters
     pathParams = [sanitizer sanitizeForSerialization:pathParams];

@@ -97,6 +97,7 @@ extern NSInteger kACUsersApiMissingParamErrorCode;
 /// @param includeProperties Optional. Boolean (true/false) - If false, only return the user&#39;s device types. If true, also return device types shared by other users. (optional)
 /// @param owner Return owned and/or shared devices. Default to ALL. (optional)
 /// @param includeShareInfo Include share info (optional)
+/// @param dtid Return only devices of this device type. If empty, assumes all device types allowed by the authorization. (optional)
 /// 
 ///  code:0 message:"success"
 ///
@@ -107,6 +108,7 @@ extern NSInteger kACUsersApiMissingParamErrorCode;
     includeProperties: (NSNumber*) includeProperties
     owner: (NSString*) owner
     includeShareInfo: (NSNumber*) includeShareInfo
+    dtid: (NSString*) dtid
     completionHandler: (void (^)(ACDevicesEnvelope* output, NSError* error)) handler;
 
 
@@ -131,6 +133,7 @@ extern NSInteger kACUsersApiMissingParamErrorCode;
 /// @param excludeDisabled Exclude disabled rules in the result. (optional)
 /// @param count Desired count of items in the result set. (optional)
 /// @param offset Offset for pagination. (optional)
+/// @param owner Rule owner (optional)
 /// 
 ///  code:0 message:"success"
 ///
@@ -139,6 +142,7 @@ extern NSInteger kACUsersApiMissingParamErrorCode;
     excludeDisabled: (NSNumber*) excludeDisabled
     count: (NSNumber*) count
     offset: (NSNumber*) offset
+    owner: (NSString*) owner
     completionHandler: (void (^)(ACRulesEnvelope* output, NSError* error)) handler;
 
 

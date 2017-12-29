@@ -5,6 +5,7 @@ ARTIK Cloud Objective-C SDK
 
 This SDK helps you connect your iOS or OS X applications to ARTIK Cloud. It exposes a number of methods to easily execute REST API calls to ARTIK Cloud.
 
+
 ## Requirements
 
 The SDK requires [**ARC (Automatic Reference Counting)**](http://stackoverflow.com/questions/7778356/how-to-enable-disable-automatic-reference-counting) to be enabled in the Xcode project.
@@ -34,7 +35,6 @@ pod 'ArtikCloud', :path => 'Vendor/ArtikCloud'
 
 Import the following:
 
-
 ```objc
 #import <ArtikCloud/ACApiClient.h>
 #import <ArtikCloud/ACDefaultConfiguration.h>
@@ -53,11 +53,21 @@ Import the following:
 #import <ArtikCloud/ACAggregatesHistogramResponse.h>
 #import <ArtikCloud/ACAggregatesResponse.h>
 #import <ArtikCloud/ACAppProperties.h>
+#import <ArtikCloud/ACCertificateData.h>
+#import <ArtikCloud/ACCertificateEnvelope.h>
+#import <ArtikCloud/ACCertificateFields.h>
+#import <ArtikCloud/ACCertificateId.h>
 #import <ArtikCloud/ACCheckTokenMessage.h>
 #import <ArtikCloud/ACCheckTokenResponse.h>
+#import <ArtikCloud/ACContactInfo.h>
 #import <ArtikCloud/ACDevice.h>
 #import <ArtikCloud/ACDeviceArray.h>
 #import <ArtikCloud/ACDeviceEnvelope.h>
+#import <ArtikCloud/ACDevicePricingTier.h>
+#import <ArtikCloud/ACDevicePricingTierEnvelope.h>
+#import <ArtikCloud/ACDevicePricingTierRequest.h>
+#import <ArtikCloud/ACDevicePricingTiers.h>
+#import <ArtikCloud/ACDevicePricingTiersEnvelope.h>
 #import <ArtikCloud/ACDeviceRegCompleteRequest.h>
 #import <ArtikCloud/ACDeviceRegConfirmUserRequest.h>
 #import <ArtikCloud/ACDeviceRegConfirmUserResponse.h>
@@ -84,6 +94,10 @@ Import the following:
 #import <ArtikCloud/ACDeviceTypeEnvelope.h>
 #import <ArtikCloud/ACDeviceTypeInfo.h>
 #import <ArtikCloud/ACDeviceTypeInfoEnvelope.h>
+#import <ArtikCloud/ACDeviceTypePricingList.h>
+#import <ArtikCloud/ACDeviceTypePricingTier.h>
+#import <ArtikCloud/ACDeviceTypePricingTiersEnvelope.h>
+#import <ArtikCloud/ACDeviceTypeUpdateInput.h>
 #import <ArtikCloud/ACDeviceTypesEnvelope.h>
 #import <ArtikCloud/ACDeviceTypesInfo.h>
 #import <ArtikCloud/ACDeviceTypesInfoEnvelope.h>
@@ -131,6 +145,8 @@ Import the following:
 #import <ArtikCloud/ACPropertiesEnvelope.h>
 #import <ArtikCloud/ACRefreshTokenResponse.h>
 #import <ArtikCloud/ACRegisterMessage.h>
+#import <ArtikCloud/ACRejectedCSVRow.h>
+#import <ArtikCloud/ACRejectedCSVRowsEnvelope.h>
 #import <ArtikCloud/ACRuleArray.h>
 #import <ArtikCloud/ACRuleCreationInfo.h>
 #import <ArtikCloud/ACRuleEnvelope.h>
@@ -168,6 +184,7 @@ Import the following:
 #import <ArtikCloud/ACTaskUpdateRequest.h>
 #import <ArtikCloud/ACTaskUpdateResponse.h>
 #import <ArtikCloud/ACTasksStatusCounts.h>
+#import <ArtikCloud/ACTier.h>
 #import <ArtikCloud/ACToken.h>
 #import <ArtikCloud/ACTokenInfo.h>
 #import <ArtikCloud/ACTokenInfoSuccessResponse.h>
@@ -176,24 +193,36 @@ Import the following:
 #import <ArtikCloud/ACUnregisterDeviceResponse.h>
 #import <ArtikCloud/ACUnregisterDeviceResponseEnvelope.h>
 #import <ArtikCloud/ACUpdateParameters.h>
+#import <ArtikCloud/ACUpgradePath.h>
+#import <ArtikCloud/ACUpgradePathEnvelope.h>
+#import <ArtikCloud/ACUpgradePathUserToken.h>
+#import <ArtikCloud/ACUpgradePathUserTokenEnvelope.h>
+#import <ArtikCloud/ACUploadIdEnvelope.h>
+#import <ArtikCloud/ACUploadStatusEnvelope.h>
 #import <ArtikCloud/ACUser.h>
 #import <ArtikCloud/ACUserEnvelope.h>
 #import <ArtikCloud/ACValidationCallbackInfo.h>
+#import <ArtikCloud/ACValidityPeriod.h>
 #import <ArtikCloud/ACWebSocketError.h>
+#import <ArtikCloud/ACWhitelist.h>
+#import <ArtikCloud/ACWhitelistEnvelope.h>
+#import <ArtikCloud/ACWhitelistResultEnvelope.h>
 // load API classes for accessing endpoints
 #import <ArtikCloud/ACDeviceTypesApi.h>
 #import <ArtikCloud/ACDevicesApi.h>
 #import <ArtikCloud/ACDevicesManagementApi.h>
-#import <ArtikCloud/ACDevicessharesApi.h>
-#import <ArtikCloud/ACDevicestatusApi.h>
+#import <ArtikCloud/ACDevicesSharesApi.h>
+#import <ArtikCloud/ACDevicesStatusApi.h>
 #import <ArtikCloud/ACExportApi.h>
 #import <ArtikCloud/ACMessagesApi.h>
+#import <ArtikCloud/ACMonetizationApi.h>
 #import <ArtikCloud/ACRegistrationsApi.h>
 #import <ArtikCloud/ACRulesApi.h>
 #import <ArtikCloud/ACSubscriptionsApi.h>
 #import <ArtikCloud/ACTagsApi.h>
 #import <ArtikCloud/ACTokensApi.h>
 #import <ArtikCloud/ACUsersApi.h>
+#import <ArtikCloud/ACWhitelistingApi.h>
 
 ```
 
@@ -265,13 +294,13 @@ Class | Method | HTTP request | Description
 *ACDevicesManagementApi* | [**updateServerProperties**](docs/ACDevicesManagementApi.md#updateserverproperties) | **POST** /devicemgmt/devices/{did}/serverproperties | Updates a device&#39;s server properties.
 *ACDevicesManagementApi* | [**updateTask**](docs/ACDevicesManagementApi.md#updatetask) | **PUT** /devicemgmt/tasks/{tid} | Updates a task for all devices - For now just allows changing the state to cancelled.
 *ACDevicesManagementApi* | [**updateTaskForDevice**](docs/ACDevicesManagementApi.md#updatetaskfordevice) | **PUT** /devicemgmt/tasks/{tid}/devices/{did} | Updates a task for a specific device - For now just allows changing the state to cancelled.
-*ACDevicessharesApi* | [**createShareForDevice**](docs/ACDevicessharesApi.md#createsharefordevice) | **POST** in/api/devices/{deviceId}/shares | Share a device 
-*ACDevicessharesApi* | [**deleteSharingForDevice**](docs/ACDevicessharesApi.md#deletesharingfordevice) | **DELETE** in/api/devices/{deviceId}/shares/{shareId} | Delete specific share of the given device id
-*ACDevicessharesApi* | [**getAllSharesForDevice**](docs/ACDevicessharesApi.md#getallsharesfordevice) | **GET** in/api/devices/{deviceId}/shares | List all shares for the given device id
-*ACDevicessharesApi* | [**getSharingForDevice**](docs/ACDevicessharesApi.md#getsharingfordevice) | **GET** in/api/devices/{deviceId}/shares/{shareId} | Get specific share of the given device id
-*ACDevicestatusApi* | [**getDeviceStatus**](docs/ACDevicestatusApi.md#getdevicestatus) | **GET** /devices/{deviceId}/status | Get Device Status
-*ACDevicestatusApi* | [**getDevicesStatus**](docs/ACDevicestatusApi.md#getdevicesstatus) | **GET** /devices/status | Get Devices Status
-*ACDevicestatusApi* | [**putDeviceStatus**](docs/ACDevicestatusApi.md#putdevicestatus) | **PUT** /devices/{deviceId}/status | Update Device Status
+*ACDevicesSharesApi* | [**createShareForDevice**](docs/ACDevicesSharesApi.md#createsharefordevice) | **POST** /devices/{deviceId}/shares | Share a device 
+*ACDevicesSharesApi* | [**deleteSharingForDevice**](docs/ACDevicesSharesApi.md#deletesharingfordevice) | **DELETE** /devices/{deviceId}/shares/{shareId} | Delete specific share of the given device id
+*ACDevicesSharesApi* | [**getAllSharesForDevice**](docs/ACDevicesSharesApi.md#getallsharesfordevice) | **GET** /devices/{deviceId}/shares | List all shares for the given device id
+*ACDevicesSharesApi* | [**getSharingForDevice**](docs/ACDevicesSharesApi.md#getsharingfordevice) | **GET** /devices/{deviceId}/shares/{shareId} | Get specific share of the given device id
+*ACDevicesStatusApi* | [**getDeviceStatus**](docs/ACDevicesStatusApi.md#getdevicestatus) | **GET** /devices/{deviceId}/status | Get Device Status
+*ACDevicesStatusApi* | [**getDevicesStatus**](docs/ACDevicesStatusApi.md#getdevicesstatus) | **GET** /devices/status | Get Devices Status
+*ACDevicesStatusApi* | [**putDeviceStatus**](docs/ACDevicesStatusApi.md#putdevicestatus) | **PUT** /devices/{deviceId}/status | Update Device Status
 *ACExportApi* | [**exportRequest**](docs/ACExportApi.md#exportrequest) | **POST** /messages/export | Create Export Request
 *ACExportApi* | [**getExportHistory**](docs/ACExportApi.md#getexporthistory) | **GET** /messages/export/history | Get Export History
 *ACExportApi* | [**getExportResult**](docs/ACExportApi.md#getexportresult) | **GET** /messages/export/{exportId}/result | Get Export Result
@@ -285,6 +314,11 @@ Class | Method | HTTP request | Description
 *ACMessagesApi* | [**getNormalizedMessages**](docs/ACMessagesApi.md#getnormalizedmessages) | **GET** /messages | Get Normalized Messages
 *ACMessagesApi* | [**sendActions**](docs/ACMessagesApi.md#sendactions) | **POST** /actions | Send Actions
 *ACMessagesApi* | [**sendMessage**](docs/ACMessagesApi.md#sendmessage) | **POST** /messages | Send Message
+*ACMonetizationApi* | [**createPricingTiers**](docs/ACMonetizationApi.md#createpricingtiers) | **POST** /pricing/devicetypes/{dtid}/pricingtiers | Define devicetype&#39;s pricing tiers.
+*ACMonetizationApi* | [**getPricingTiers**](docs/ACMonetizationApi.md#getpricingtiers) | **GET** /pricing/devices/{did}/pricingtiers | Get a device&#39;s pricing tiers
+*ACMonetizationApi* | [**getThePricingTiers**](docs/ACMonetizationApi.md#getthepricingtiers) | **GET** /pricing/devicetypes/{dtid}/pricingtiers | Get devicetype&#39;s pricing tiers.
+*ACMonetizationApi* | [**getUpgradePath**](docs/ACMonetizationApi.md#getupgradepath) | **GET** /pricing/devices/{did}/revenueshare/upgradepath | Get upgrade path
+*ACMonetizationApi* | [**setPricingTier**](docs/ACMonetizationApi.md#setpricingtier) | **PUT** /pricing/devices/{did}/pricingtiers | Set a device&#39;s pricing tier
 *ACRegistrationsApi* | [**confirmUser**](docs/ACRegistrationsApi.md#confirmuser) | **PUT** /devices/registrations/pin | Confirm User
 *ACRegistrationsApi* | [**getRequestStatusForUser**](docs/ACRegistrationsApi.md#getrequeststatusforuser) | **GET** /devices/registrations/{requestId}/status | Get Request Status For User
 *ACRegistrationsApi* | [**unregisterDevice**](docs/ACRegistrationsApi.md#unregisterdevice) | **DELETE** /devices/{deviceId}/registrations | Unregister Device
@@ -311,8 +345,17 @@ Class | Method | HTTP request | Description
 *ACUsersApi* | [**getUserDevices**](docs/ACUsersApi.md#getuserdevices) | **GET** /users/{userId}/devices | Get User Devices
 *ACUsersApi* | [**getUserProperties**](docs/ACUsersApi.md#getuserproperties) | **GET** /users/{userId}/properties | Get User application properties
 *ACUsersApi* | [**getUserRules**](docs/ACUsersApi.md#getuserrules) | **GET** /users/{userId}/rules | Get User Rules
-*ACUsersApi* | [**listAllSharesForUser**](docs/ACUsersApi.md#listallsharesforuser) | **GET** in/api/users/{userId}/shares | Get User shares
+*ACUsersApi* | [**listAllSharesForUser**](docs/ACUsersApi.md#listallsharesforuser) | **GET** /users/{userId}/shares | Get User shares
 *ACUsersApi* | [**updateUserProperties**](docs/ACUsersApi.md#updateuserproperties) | **PUT** /users/{userId}/properties | Update User Application Properties
+*ACWhitelistingApi* | [**deleteVdid**](docs/ACWhitelistingApi.md#deletevdid) | **DELETE** /devicetypes/{dtid}/whitelist/{vdid} | Delete a vdid from the devicetype whitelist.
+*ACWhitelistingApi* | [**deleteWhitelistCertificate**](docs/ACWhitelistingApi.md#deletewhitelistcertificate) | **DELETE** /devicetypes/{dtid}/whitelist/certificates/{cid} | Delete a whitelist certificate associated with a devicetype.
+*ACWhitelistingApi* | [**enableWhitelist**](docs/ACWhitelistingApi.md#enablewhitelist) | **PUT** /devicetypes/:dtid/whitelist/enable | Enable or disble whitelist feature of a device type
+*ACWhitelistingApi* | [**getRejectedRowList**](docs/ACWhitelistingApi.md#getrejectedrowlist) | **GET** /devicetypes/{dtid}/whitelist/{uploadId}/rejectedRows | Get the list of rejected rows for an uploaded CSV file.
+*ACWhitelistingApi* | [**getUploadStatus**](docs/ACWhitelistingApi.md#getuploadstatus) | **GET** /devicetypes/{dtid}/whitelist/{uploadId}/status | Get the status of a uploaded CSV file.
+*ACWhitelistingApi* | [**getWhitelist**](docs/ACWhitelistingApi.md#getwhitelist) | **GET** /devicetypes/{dtid}/whitelist | Get whitelisted vdids of a device type.
+*ACWhitelistingApi* | [**getWhitelistCertificate**](docs/ACWhitelistingApi.md#getwhitelistcertificate) | **GET** /devicetypes/{dtid}/whitelist/certificates | Get whitelist certificate of device type.
+*ACWhitelistingApi* | [**getWhitelistStatus**](docs/ACWhitelistingApi.md#getwhiteliststatus) | **GET** /devicetypes/{dtid}/whitelist/status | Get the status of whitelist feature (enabled/disabled) of a device type.
+*ACWhitelistingApi* | [**uploadCSV**](docs/ACWhitelistingApi.md#uploadcsv) | **POST** /devicetypes/{dtid}/whitelist | Upload a CSV file related to the Device Type.
 
 
 ## Documentation For Models
@@ -331,11 +374,21 @@ Class | Method | HTTP request | Description
  - [ACAggregatesHistogramResponse](docs/ACAggregatesHistogramResponse.md)
  - [ACAggregatesResponse](docs/ACAggregatesResponse.md)
  - [ACAppProperties](docs/ACAppProperties.md)
+ - [ACCertificateData](docs/ACCertificateData.md)
+ - [ACCertificateEnvelope](docs/ACCertificateEnvelope.md)
+ - [ACCertificateFields](docs/ACCertificateFields.md)
+ - [ACCertificateId](docs/ACCertificateId.md)
  - [ACCheckTokenMessage](docs/ACCheckTokenMessage.md)
  - [ACCheckTokenResponse](docs/ACCheckTokenResponse.md)
+ - [ACContactInfo](docs/ACContactInfo.md)
  - [ACDevice](docs/ACDevice.md)
  - [ACDeviceArray](docs/ACDeviceArray.md)
  - [ACDeviceEnvelope](docs/ACDeviceEnvelope.md)
+ - [ACDevicePricingTier](docs/ACDevicePricingTier.md)
+ - [ACDevicePricingTierEnvelope](docs/ACDevicePricingTierEnvelope.md)
+ - [ACDevicePricingTierRequest](docs/ACDevicePricingTierRequest.md)
+ - [ACDevicePricingTiers](docs/ACDevicePricingTiers.md)
+ - [ACDevicePricingTiersEnvelope](docs/ACDevicePricingTiersEnvelope.md)
  - [ACDeviceRegCompleteRequest](docs/ACDeviceRegCompleteRequest.md)
  - [ACDeviceRegConfirmUserRequest](docs/ACDeviceRegConfirmUserRequest.md)
  - [ACDeviceRegConfirmUserResponse](docs/ACDeviceRegConfirmUserResponse.md)
@@ -362,6 +415,10 @@ Class | Method | HTTP request | Description
  - [ACDeviceTypeEnvelope](docs/ACDeviceTypeEnvelope.md)
  - [ACDeviceTypeInfo](docs/ACDeviceTypeInfo.md)
  - [ACDeviceTypeInfoEnvelope](docs/ACDeviceTypeInfoEnvelope.md)
+ - [ACDeviceTypePricingList](docs/ACDeviceTypePricingList.md)
+ - [ACDeviceTypePricingTier](docs/ACDeviceTypePricingTier.md)
+ - [ACDeviceTypePricingTiersEnvelope](docs/ACDeviceTypePricingTiersEnvelope.md)
+ - [ACDeviceTypeUpdateInput](docs/ACDeviceTypeUpdateInput.md)
  - [ACDeviceTypesEnvelope](docs/ACDeviceTypesEnvelope.md)
  - [ACDeviceTypesInfo](docs/ACDeviceTypesInfo.md)
  - [ACDeviceTypesInfoEnvelope](docs/ACDeviceTypesInfoEnvelope.md)
@@ -409,6 +466,8 @@ Class | Method | HTTP request | Description
  - [ACPropertiesEnvelope](docs/ACPropertiesEnvelope.md)
  - [ACRefreshTokenResponse](docs/ACRefreshTokenResponse.md)
  - [ACRegisterMessage](docs/ACRegisterMessage.md)
+ - [ACRejectedCSVRow](docs/ACRejectedCSVRow.md)
+ - [ACRejectedCSVRowsEnvelope](docs/ACRejectedCSVRowsEnvelope.md)
  - [ACRuleArray](docs/ACRuleArray.md)
  - [ACRuleCreationInfo](docs/ACRuleCreationInfo.md)
  - [ACRuleEnvelope](docs/ACRuleEnvelope.md)
@@ -446,6 +505,7 @@ Class | Method | HTTP request | Description
  - [ACTaskUpdateRequest](docs/ACTaskUpdateRequest.md)
  - [ACTaskUpdateResponse](docs/ACTaskUpdateResponse.md)
  - [ACTasksStatusCounts](docs/ACTasksStatusCounts.md)
+ - [ACTier](docs/ACTier.md)
  - [ACToken](docs/ACToken.md)
  - [ACTokenInfo](docs/ACTokenInfo.md)
  - [ACTokenInfoSuccessResponse](docs/ACTokenInfoSuccessResponse.md)
@@ -454,10 +514,20 @@ Class | Method | HTTP request | Description
  - [ACUnregisterDeviceResponse](docs/ACUnregisterDeviceResponse.md)
  - [ACUnregisterDeviceResponseEnvelope](docs/ACUnregisterDeviceResponseEnvelope.md)
  - [ACUpdateParameters](docs/ACUpdateParameters.md)
+ - [ACUpgradePath](docs/ACUpgradePath.md)
+ - [ACUpgradePathEnvelope](docs/ACUpgradePathEnvelope.md)
+ - [ACUpgradePathUserToken](docs/ACUpgradePathUserToken.md)
+ - [ACUpgradePathUserTokenEnvelope](docs/ACUpgradePathUserTokenEnvelope.md)
+ - [ACUploadIdEnvelope](docs/ACUploadIdEnvelope.md)
+ - [ACUploadStatusEnvelope](docs/ACUploadStatusEnvelope.md)
  - [ACUser](docs/ACUser.md)
  - [ACUserEnvelope](docs/ACUserEnvelope.md)
  - [ACValidationCallbackInfo](docs/ACValidationCallbackInfo.md)
+ - [ACValidityPeriod](docs/ACValidityPeriod.md)
  - [ACWebSocketError](docs/ACWebSocketError.md)
+ - [ACWhitelist](docs/ACWhitelist.md)
+ - [ACWhitelistEnvelope](docs/ACWhitelistEnvelope.md)
+ - [ACWhitelistResultEnvelope](docs/ACWhitelistResultEnvelope.md)
 
 
 ## Documentation For Authorization
@@ -471,7 +541,6 @@ Class | Method | HTTP request | Description
 - **Scopes**: 
  - **read:artikcloud**: Read from ARTIK Cloud
  - **write:artikcloud**: Write from ARTIK Cloud
-
 
 Usage
 ------
@@ -498,8 +567,4 @@ Licence and Copyright
 
 Licensed under the Apache License. See [LICENSE](https://github.com/artikcloud/artikcloud-swift/blob/master/LICENSE).
 
-Copyright (c) 2017 Samsung Electronics Co., Ltd.
-
-
-
-
+Copyright (c) 2016 Samsung Electronics Co., Ltd.

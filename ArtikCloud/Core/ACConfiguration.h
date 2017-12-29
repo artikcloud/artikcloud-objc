@@ -15,7 +15,7 @@
 */
 
 
-static NSString * const kACAPIVersion = @"2.0.6";
+static NSString * const kACAPIVersion = @"2.2.3";
 
 @protocol ACConfiguration <NSObject>
 

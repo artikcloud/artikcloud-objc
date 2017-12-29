@@ -18,10 +18,10 @@
 
 
 
-@interface ACDevicestatusApi: NSObject <ACApi>
+@interface ACDevicesStatusApi: NSObject <ACApi>
 
-extern NSString* kACDevicestatusApiErrorDomain;
-extern NSInteger kACDevicestatusApiMissingParamErrorCode;
+extern NSString* kACDevicesStatusApiErrorDomain;
+extern NSInteger kACDevicesStatusApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(ACApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 

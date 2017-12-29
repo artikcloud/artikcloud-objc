@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**getUserDevices**](ACUsersApi.md#getuserdevices) | **GET** /users/{userId}/devices | Get User Devices
 [**getUserProperties**](ACUsersApi.md#getuserproperties) | **GET** /users/{userId}/properties | Get User application properties
 [**getUserRules**](ACUsersApi.md#getuserrules) | **GET** /users/{userId}/rules | Get User Rules
-[**listAllSharesForUser**](ACUsersApi.md#listallsharesforuser) | **GET** in/api/users/{userId}/shares | Get User shares
+[**listAllSharesForUser**](ACUsersApi.md#listallsharesforuser) | **GET** /users/{userId}/shares | Get User shares
 [**updateUserProperties**](ACUsersApi.md#updateuserproperties) | **PUT** /users/{userId}/properties | Update User Application Properties
 
 
@@ -263,6 +263,7 @@ Name | Type | Description  | Notes
     includeProperties: (NSNumber*) includeProperties
     owner: (NSString*) owner
     includeShareInfo: (NSNumber*) includeShareInfo
+    dtid: (NSString*) dtid
         completionHandler: (void (^)(ACDevicesEnvelope* output, NSError* error)) handler;
 ```
 
@@ -284,6 +285,7 @@ NSNumber* count = @56; // Desired count of items in the result set (optional)
 NSNumber* includeProperties = @true; // Optional. Boolean (true/false) - If false, only return the user's device types. If true, also return device types shared by other users. (optional)
 NSString* owner = @"owner_example"; // Return owned and/or shared devices. Default to ALL. (optional)
 NSNumber* includeShareInfo = @true; // Include share info (optional)
+NSString* dtid = @"dtid_example"; // Return only devices of this device type. If empty, assumes all device types allowed by the authorization. (optional)
 
 ACUsersApi*apiInstance = [[ACUsersApi alloc] init];
 
@@ -294,6 +296,7 @@ ACUsersApi*apiInstance = [[ACUsersApi alloc] init];
               includeProperties:includeProperties
               owner:owner
               includeShareInfo:includeShareInfo
+              dtid:dtid
           completionHandler: ^(ACDevicesEnvelope* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -314,6 +317,7 @@ Name | Type | Description  | Notes
  **includeProperties** | **NSNumber***| Optional. Boolean (true/false) - If false, only return the user&#39;s device types. If true, also return device types shared by other users. | [optional] 
  **owner** | **NSString***| Return owned and/or shared devices. Default to ALL. | [optional] 
  **includeShareInfo** | **NSNumber***| Include share info | [optional] 
+ **dtid** | **NSString***| Return only devices of this device type. If empty, assumes all device types allowed by the authorization. | [optional] 
 
 ### Return type
 
@@ -395,6 +399,7 @@ Name | Type | Description  | Notes
     excludeDisabled: (NSNumber*) excludeDisabled
     count: (NSNumber*) count
     offset: (NSNumber*) offset
+    owner: (NSString*) owner
         completionHandler: (void (^)(ACRulesEnvelope* output, NSError* error)) handler;
 ```
 
@@ -414,6 +419,7 @@ NSString* userId = @"userId_example"; // User ID.
 NSNumber* excludeDisabled = @true; // Exclude disabled rules in the result. (optional)
 NSNumber* count = @56; // Desired count of items in the result set. (optional)
 NSNumber* offset = @56; // Offset for pagination. (optional)
+NSString* owner = @"owner_example"; // Rule owner (optional)
 
 ACUsersApi*apiInstance = [[ACUsersApi alloc] init];
 
@@ -422,6 +428,7 @@ ACUsersApi*apiInstance = [[ACUsersApi alloc] init];
               excludeDisabled:excludeDisabled
               count:count
               offset:offset
+              owner:owner
           completionHandler: ^(ACRulesEnvelope* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -440,6 +447,7 @@ Name | Type | Description  | Notes
  **excludeDisabled** | **NSNumber***| Exclude disabled rules in the result. | [optional] 
  **count** | **NSNumber***| Desired count of items in the result set. | [optional] 
  **offset** | **NSNumber***| Offset for pagination. | [optional] 
+ **owner** | **NSString***| Rule owner | [optional] 
 
 ### Return type
 

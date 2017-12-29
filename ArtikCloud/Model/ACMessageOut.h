@@ -21,6 +21,24 @@
 
 @interface ACMessageOut : ACObject
 
+/* Message Payload. [optional]
+ */
+@property(nonatomic) NSDictionary<NSString*, NSObject*>* data;
+/* Confirmation ID. [optional]
+ */
+@property(nonatomic) NSString* cid;
+/* Destination Device ID. [optional]
+ */
+@property(nonatomic) NSString* ddid;
+/* Source Device ID. [optional]
+ */
+@property(nonatomic) NSString* sdid;
+/* Timestamp (past, present or future). Defaults to current time if not provided. [optional]
+ */
+@property(nonatomic) NSNumber* ts;
+/* Type. [optional]
+ */
+@property(nonatomic) NSString* type;
 /* Message ID. [optional]
  */
 @property(nonatomic) NSString* mid;

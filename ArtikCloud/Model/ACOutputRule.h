@@ -52,4 +52,6 @@
 
 @property(nonatomic) ACRuleWarningOutput* warning;
 
+@property(nonatomic) NSString* owner;
+
 @end

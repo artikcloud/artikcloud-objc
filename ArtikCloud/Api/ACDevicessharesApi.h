@@ -19,10 +19,10 @@
 
 
 
-@interface ACDevicessharesApi: NSObject <ACApi>
+@interface ACDevicesSharesApi: NSObject <ACApi>
 
-extern NSString* kACDevicessharesApiErrorDomain;
-extern NSInteger kACDevicessharesApiMissingParamErrorCode;
+extern NSString* kACDevicesSharesApiErrorDomain;
+extern NSInteger kACDevicesSharesApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(ACApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 

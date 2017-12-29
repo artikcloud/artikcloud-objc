@@ -1,4 +1,4 @@
-#import "ACDevicessharesApi.h"
+#import "ACDevicesSharesApi.h"
 #import "ACQueryParamCollection.h"
 #import "ACApiClient.h"
 #import "ACDeviceShareInfo.h"
@@ -7,16 +7,16 @@
 #import "ACDeviceSharingId.h"
 
 
-@interface ACDevicessharesApi ()
+@interface ACDevicesSharesApi ()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
-@implementation ACDevicessharesApi
+@implementation ACDevicesSharesApi
 
-NSString* kACDevicessharesApiErrorDomain = @"ACDevicessharesApiErrorDomain";
-NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
+NSString* kACDevicesSharesApiErrorDomain = @"ACDevicesSharesApiErrorDomain";
+NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
 
 @synthesize apiClient = _apiClient;
 
@@ -69,7 +69,7 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
@@ -80,13 +80,13 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceShareInfo);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceShareInfo"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"in/api/devices/{deviceId}/shares"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/devices/{deviceId}/shares"];
 
     // remove format in URL if needed
     [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
@@ -155,7 +155,7 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
@@ -166,13 +166,13 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(shareId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"shareId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"in/api/devices/{deviceId}/shares/{shareId}"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/devices/{deviceId}/shares/{shareId}"];
 
     // remove format in URL if needed
     [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
@@ -246,13 +246,13 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"in/api/devices/{deviceId}/shares"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/devices/{deviceId}/shares"];
 
     // remove format in URL if needed
     [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
@@ -326,7 +326,7 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
@@ -337,13 +337,13 @@ NSInteger kACDevicessharesApiMissingParamErrorCode = 234513;
         NSParameterAssert(shareId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"shareId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicessharesApiErrorDomain code:kACDevicessharesApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesSharesApiErrorDomain code:kACDevicesSharesApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"in/api/devices/{deviceId}/shares/{shareId}"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/devices/{deviceId}/shares/{shareId}"];
 
     // remove format in URL if needed
     [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];

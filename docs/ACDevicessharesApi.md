@@ -1,13 +1,13 @@
-# ACDevicessharesApi
+# ACDevicesSharesApi
 
 All URIs are relative to *https://api.artik.cloud/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createShareForDevice**](ACDevicessharesApi.md#createsharefordevice) | **POST** in/api/devices/{deviceId}/shares | Share a device 
-[**deleteSharingForDevice**](ACDevicessharesApi.md#deletesharingfordevice) | **DELETE** in/api/devices/{deviceId}/shares/{shareId} | Delete specific share of the given device id
-[**getAllSharesForDevice**](ACDevicessharesApi.md#getallsharesfordevice) | **GET** in/api/devices/{deviceId}/shares | List all shares for the given device id
-[**getSharingForDevice**](ACDevicessharesApi.md#getsharingfordevice) | **GET** in/api/devices/{deviceId}/shares/{shareId} | Get specific share of the given device id
+[**createShareForDevice**](ACDevicesSharesApi.md#createsharefordevice) | **POST** /devices/{deviceId}/shares | Share a device 
+[**deleteSharingForDevice**](ACDevicesSharesApi.md#deletesharingfordevice) | **DELETE** /devices/{deviceId}/shares/{shareId} | Delete specific share of the given device id
+[**getAllSharesForDevice**](ACDevicesSharesApi.md#getallsharesfordevice) | **GET** /devices/{deviceId}/shares | List all shares for the given device id
+[**getSharingForDevice**](ACDevicesSharesApi.md#getsharingfordevice) | **GET** /devices/{deviceId}/shares/{shareId} | Get specific share of the given device id
 
 
 # **createShareForDevice**
@@ -32,7 +32,7 @@ ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 NSString* deviceId = @"deviceId_example"; // Device ID.
 ACDeviceShareInfo* deviceShareInfo = [[ACDeviceShareInfo alloc] init]; // Device object that needs to be added
 
-ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 
 // Share a device 
 [apiInstance createShareForDeviceWithDeviceId:deviceId
@@ -42,7 +42,7 @@ ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicessharesApi->createShareForDevice: %@", error);
+                            NSLog(@"Error calling ACDevicesSharesApi->createShareForDevice: %@", error);
                         }
                     }];
 ```
@@ -91,7 +91,7 @@ ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 NSString* deviceId = @"deviceId_example"; // Device ID.
 NSString* shareId = @"shareId_example"; // Share ID.
 
-ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 
 // Delete specific share of the given device id
 [apiInstance deleteSharingForDeviceWithDeviceId:deviceId
@@ -101,7 +101,7 @@ ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicessharesApi->deleteSharingForDevice: %@", error);
+                            NSLog(@"Error calling ACDevicesSharesApi->deleteSharingForDevice: %@", error);
                         }
                     }];
 ```
@@ -152,7 +152,7 @@ NSString* deviceId = @"deviceId_example"; // Device ID.
 NSNumber* count = @56; // Desired count of items in the result set. (optional)
 NSNumber* offset = @56; // Offset for pagination. (optional)
 
-ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 
 // List all shares for the given device id
 [apiInstance getAllSharesForDeviceWithDeviceId:deviceId
@@ -163,7 +163,7 @@ ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicessharesApi->getAllSharesForDevice: %@", error);
+                            NSLog(@"Error calling ACDevicesSharesApi->getAllSharesForDevice: %@", error);
                         }
                     }];
 ```
@@ -213,7 +213,7 @@ ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 NSString* deviceId = @"deviceId_example"; // Device ID.
 NSString* shareId = @"shareId_example"; // Share ID.
 
-ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
+ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 
 // Get specific share of the given device id
 [apiInstance getSharingForDeviceWithDeviceId:deviceId
@@ -223,7 +223,7 @@ ACDevicessharesApi*apiInstance = [[ACDevicessharesApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicessharesApi->getSharingForDevice: %@", error);
+                            NSLog(@"Error calling ACDevicesSharesApi->getSharingForDevice: %@", error);
                         }
                     }];
 ```

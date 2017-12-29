@@ -65,7 +65,7 @@ extern NSString *const ACResponseObjectErrorKey;
 * @param url The base url
 * @param configuration The configuration implementation
 */
-- (instancetype)initWithBaseURL:(NSURL *)url configuration:(id<SWGConfiguration>)configuration;
+- (instancetype)initWithBaseURL:(NSURL *)url configuration:(id<ACConfiguration>)configuration;
 
 /**
  * Performs request

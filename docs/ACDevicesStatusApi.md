@@ -1,12 +1,12 @@
-# ACDevicestatusApi
+# ACDevicesStatusApi
 
 All URIs are relative to *https://api.artik.cloud/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDeviceStatus**](ACDevicestatusApi.md#getdevicestatus) | **GET** /devices/{deviceId}/status | Get Device Status
-[**getDevicesStatus**](ACDevicestatusApi.md#getdevicesstatus) | **GET** /devices/status | Get Devices Status
-[**putDeviceStatus**](ACDevicestatusApi.md#putdevicestatus) | **PUT** /devices/{deviceId}/status | Update Device Status
+[**getDeviceStatus**](ACDevicesStatusApi.md#getdevicestatus) | **GET** /devices/{deviceId}/status | Get Device Status
+[**getDevicesStatus**](ACDevicesStatusApi.md#getdevicesstatus) | **GET** /devices/status | Get Devices Status
+[**putDeviceStatus**](ACDevicesStatusApi.md#putdevicestatus) | **PUT** /devices/{deviceId}/status | Update Device Status
 
 
 # **getDeviceStatus**
@@ -33,7 +33,7 @@ NSString* deviceId = @"deviceId_example"; // Device ID.
 NSNumber* includeSnapshot = @true; // Include device snapshot into the response (optional)
 NSNumber* includeSnapshotTimestamp = @true; // Include device snapshot timestamp into the response (optional)
 
-ACDevicestatusApi*apiInstance = [[ACDevicestatusApi alloc] init];
+ACDevicesStatusApi*apiInstance = [[ACDevicesStatusApi alloc] init];
 
 // Get Device Status
 [apiInstance getDeviceStatusWithDeviceId:deviceId
@@ -44,7 +44,7 @@ ACDevicestatusApi*apiInstance = [[ACDevicestatusApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicestatusApi->getDeviceStatus: %@", error);
+                            NSLog(@"Error calling ACDevicesStatusApi->getDeviceStatus: %@", error);
                         }
                     }];
 ```
@@ -96,7 +96,7 @@ NSString* dids = @"dids_example"; // List of device ids (comma-separated) for wh
 NSNumber* includeSnapshot = @true; // Include device snapshot into the response (optional)
 NSNumber* includeSnapshotTimestamp = @true; // Include device snapshot timestamp into the response (optional)
 
-ACDevicestatusApi*apiInstance = [[ACDevicestatusApi alloc] init];
+ACDevicesStatusApi*apiInstance = [[ACDevicesStatusApi alloc] init];
 
 // Get Devices Status
 [apiInstance getDevicesStatusWithDids:dids
@@ -107,7 +107,7 @@ ACDevicestatusApi*apiInstance = [[ACDevicestatusApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicestatusApi->getDevicesStatus: %@", error);
+                            NSLog(@"Error calling ACDevicesStatusApi->getDevicesStatus: %@", error);
                         }
                     }];
 ```
@@ -157,7 +157,7 @@ ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
 NSString* deviceId = @"deviceId_example"; // Device ID.
 ACDeviceStatusPut* body = [[ACDeviceStatusPut alloc] init]; // Body (optional)
 
-ACDevicestatusApi*apiInstance = [[ACDevicestatusApi alloc] init];
+ACDevicesStatusApi*apiInstance = [[ACDevicesStatusApi alloc] init];
 
 // Update Device Status
 [apiInstance putDeviceStatusWithDeviceId:deviceId
@@ -167,7 +167,7 @@ ACDevicestatusApi*apiInstance = [[ACDevicestatusApi alloc] init];
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling ACDevicestatusApi->putDeviceStatus: %@", error);
+                            NSLog(@"Error calling ACDevicesStatusApi->putDeviceStatus: %@", error);
                         }
                     }];
 ```

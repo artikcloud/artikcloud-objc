@@ -1,4 +1,4 @@
-#import "ACDevicestatusApi.h"
+#import "ACDevicesStatusApi.h"
 #import "ACQueryParamCollection.h"
 #import "ACApiClient.h"
 #import "ACDeviceStatus.h"
@@ -6,16 +6,16 @@
 #import "ACDeviceStatusPut.h"
 
 
-@interface ACDevicestatusApi ()
+@interface ACDevicesStatusApi ()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
-@implementation ACDevicestatusApi
+@implementation ACDevicesStatusApi
 
-NSString* kACDevicestatusApiErrorDomain = @"ACDevicestatusApiErrorDomain";
-NSInteger kACDevicestatusApiMissingParamErrorCode = 234513;
+NSString* kACDevicesStatusApiErrorDomain = @"ACDevicesStatusApiErrorDomain";
+NSInteger kACDevicesStatusApiMissingParamErrorCode = 234513;
 
 @synthesize apiClient = _apiClient;
 
@@ -71,7 +71,7 @@ NSInteger kACDevicestatusApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicestatusApiErrorDomain code:kACDevicestatusApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesStatusApiErrorDomain code:kACDevicesStatusApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
@@ -154,7 +154,7 @@ NSInteger kACDevicestatusApiMissingParamErrorCode = 234513;
         NSParameterAssert(dids);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"dids"] };
-            NSError* error = [NSError errorWithDomain:kACDevicestatusApiErrorDomain code:kACDevicestatusApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesStatusApiErrorDomain code:kACDevicesStatusApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
@@ -234,7 +234,7 @@ NSInteger kACDevicestatusApiMissingParamErrorCode = 234513;
         NSParameterAssert(deviceId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceId"] };
-            NSError* error = [NSError errorWithDomain:kACDevicestatusApiErrorDomain code:kACDevicestatusApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kACDevicesStatusApiErrorDomain code:kACDevicesStatusApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
