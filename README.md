@@ -567,4 +567,4 @@ Licence and Copyright
 
 Licensed under the Apache License. See [LICENSE](https://github.com/artikcloud/artikcloud-swift/blob/master/LICENSE).
 
-Copyright (c) 2016 Samsung Electronics Co., Ltd.
+Copyright (c) 2017 Samsung Electronics Co., Ltd.
