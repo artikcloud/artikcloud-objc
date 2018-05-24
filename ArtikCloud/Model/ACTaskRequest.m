@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"filter": @"filter", @"taskType": @"taskType", @"dtid": @"dtid", @"_property": @"property", @"dids": @"dids", @"taskParameters": @"taskParameters" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"filter": @"filter", @"taskType": @"taskType", @"dtid": @"dtid", @"_property": @"property", @"dids": @"dids", @"needsAcceptance": @"needsAcceptance", @"taskParameters": @"taskParameters" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"filter", @"taskType", @"dtid", @"_property", @"dids", @"taskParameters"];
+  NSArray *optionalProperties = @[@"filter", @"taskType", @"dtid", @"_property", @"dids", @"needsAcceptance", @"taskParameters"];
   return [optionalProperties containsObject:propertyName];
 }
 

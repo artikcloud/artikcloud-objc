@@ -1,6 +1,7 @@
 #import "ACDevicesManagementApi.h"
 #import "ACQueryParamCollection.h"
 #import "ACApiClient.h"
+#import "ACAcceptanceStatusResponse.h"
 #import "ACDeviceTaskUpdateRequest.h"
 #import "ACDeviceTaskUpdateResponse.h"
 #import "ACDeviceTypesInfo.h"
@@ -8,6 +9,7 @@
 #import "ACMetadataEnvelope.h"
 #import "ACMetadataPropertiesEnvelope.h"
 #import "ACMetadataQueryEnvelope.h"
+#import "ACPendingTasksList.h"
 #import "ACTaskByDidListEnvelope.h"
 #import "ACTaskEnvelope.h"
 #import "ACTaskListEnvelope.h"
@@ -300,6 +302,61 @@ NSInteger kACDevicesManagementApiMissingParamErrorCode = 234513;
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
                                     handler((ACTaskByDidListEnvelope*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Returns the list of  pending tasks for a particular device id.
+/// Returns the list of all pending tasks (where acceptanceStatus is equal to WAITING ) for a particular device id.
+///  @returns ACPendingTasksList*
+///
+-(NSURLSessionTask*) getAllPendingTasksByDidWithCompletionHandler: 
+    (void (^)(ACPendingTasksList* output, NSError* error)) handler {
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/devicemgmt/devices/{did}/pendingtasks"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"artikcloud_oauth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"ACPendingTasksList*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((ACPendingTasksList*)data, error);
                                 }
                             }];
 }
@@ -863,6 +920,109 @@ NSInteger kACDevicesManagementApiMissingParamErrorCode = 234513;
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
                                     handler((ACTaskListEnvelope*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Notify/Inform about task acceptance status
+/// User notify/informs to ARTIKCloud about task acceptance status
+///  @param tid Task ID. 
+///
+///  @param did Device ID. 
+///
+///  @param notifyAboutAcceptanceStatus Notify about task acceptance status 
+///
+///  @returns ACAcceptanceStatusResponse*
+///
+-(NSURLSessionTask*) notifyAboutAcceptanceWithTid: (NSString*) tid
+    did: (NSString*) did
+    notifyAboutAcceptanceStatus: (ACAcceptanceStatusResponse*) notifyAboutAcceptanceStatus
+    completionHandler: (void (^)(ACAcceptanceStatusResponse* output, NSError* error)) handler {
+    // verify the required parameter 'tid' is set
+    if (tid == nil) {
+        NSParameterAssert(tid);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"tid"] };
+            NSError* error = [NSError errorWithDomain:kACDevicesManagementApiErrorDomain code:kACDevicesManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'did' is set
+    if (did == nil) {
+        NSParameterAssert(did);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"did"] };
+            NSError* error = [NSError errorWithDomain:kACDevicesManagementApiErrorDomain code:kACDevicesManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'notifyAboutAcceptanceStatus' is set
+    if (notifyAboutAcceptanceStatus == nil) {
+        NSParameterAssert(notifyAboutAcceptanceStatus);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"notifyAboutAcceptanceStatus"] };
+            NSError* error = [NSError errorWithDomain:kACDevicesManagementApiErrorDomain code:kACDevicesManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/devicemgmt/tasks/{tid}/devices/{did}/acceptance"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (tid != nil) {
+        pathParams[@"tid"] = tid;
+    }
+    if (did != nil) {
+        pathParams[@"did"] = did;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"artikcloud_oauth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = notifyAboutAcceptanceStatus;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"ACAcceptanceStatusResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((ACAcceptanceStatusResponse*)data, error);
                                 }
                             }];
 }

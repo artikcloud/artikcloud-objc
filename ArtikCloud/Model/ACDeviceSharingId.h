@@ -23,6 +23,6 @@
 
 /* Share ID [optional]
  */
-@property(nonatomic) NSString* shareId;
+@property(nonatomic) NSString* _id;
 
 @end

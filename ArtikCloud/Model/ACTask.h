@@ -47,6 +47,9 @@
 /* Device IDs [optional]
  */
 @property(nonatomic) NSArray<NSString*>* dids;
+/* Boolean to check if task needs acceptance for OTA [optional]
+ */
+@property(nonatomic) NSNumber* needsAcceptance;
 /* Task parameters [optional]
  */
 @property(nonatomic) ACTaskParameters* taskParameters;
