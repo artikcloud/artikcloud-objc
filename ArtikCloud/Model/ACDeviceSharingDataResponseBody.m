@@ -1,6 +1,6 @@
-#import "ACMetadataRequest.h"
+#import "ACDeviceSharingDataResponseBody.h"
 
-@implementation ACMetadataRequest
+@implementation ACDeviceSharingDataResponseBody
 
 - (instancetype)init {
   self = [super init];
@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{  }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"data": @"data" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[];
+  NSArray *optionalProperties = @[@"data"];
   return [optionalProperties containsObject:propertyName];
 }
 

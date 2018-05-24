@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"filter": @"filter", @"taskType": @"taskType", @"modifiedOn": @"modifiedOn", @"dtid": @"dtid", @"statusCounts": @"statusCounts", @"property": @"_property", @"id": @"_id", @"dids": @"dids", @"taskParameters": @"taskParameters", @"createdOn": @"createdOn", @"status": @"status" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"filter": @"filter", @"taskType": @"taskType", @"modifiedOn": @"modifiedOn", @"dtid": @"dtid", @"statusCounts": @"statusCounts", @"_property": @"property", @"_id": @"id", @"dids": @"dids", @"needsAcceptance": @"needsAcceptance", @"taskParameters": @"taskParameters", @"createdOn": @"createdOn", @"status": @"status" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"filter", @"taskType", @"modifiedOn", @"dtid", @"statusCounts", @"_property", @"_id", @"dids", @"taskParameters", @"createdOn", @"status"];
+  NSArray *optionalProperties = @[@"filter", @"taskType", @"modifiedOn", @"dtid", @"statusCounts", @"_property", @"_id", @"dids", @"needsAcceptance", @"taskParameters", @"createdOn", @"status"];
   return [optionalProperties containsObject:propertyName];
 }
 

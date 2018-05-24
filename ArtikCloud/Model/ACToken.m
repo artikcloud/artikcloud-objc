@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"access_token": @"accessToken", @"expires_in": @"expiresIn", @"scope": @"scope", @"token_type": @"tokenType" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"accessToken": @"access_token", @"expiresIn": @"expires_in", @"scope": @"scope", @"tokenType": @"token_type" }];
 }
 
 /**

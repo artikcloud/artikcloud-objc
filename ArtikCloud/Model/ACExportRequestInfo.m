@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"csvHeaders": @"csvHeaders", @"endDate": @"endDate", @"format": @"format", @"order": @"order", @"sdids": @"sdids", @"sdtids": @"sdtids", @"startDate": @"startDate", @"trialId": @"trialId", @"uids": @"uids", @"url": @"url" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"csvHeaders": @"csvHeaders", @"endDate": @"endDate", @"format": @"format", @"order": @"order", @"sdids": @"sdids", @"sdtids": @"sdtids", @"startDate": @"startDate", @"trialId": @"trialId", @"uids": @"uids", @"url": @"url" }];
 }
 
 /**
