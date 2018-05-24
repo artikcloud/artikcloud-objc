@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **_property** | **NSString*** | Property | [optional] 
 **_id** | **NSString*** | Task ID | [optional] 
 **dids** | **NSArray&lt;NSString*&gt;*** | Device IDs | [optional] 
+**needsAcceptance** | **NSNumber*** | Boolean to check if task needs acceptance for OTA | [optional] 
 **taskParameters** | [**ACTaskParameters***](ACTaskParameters.md) | Task parameters | [optional] 
 **createdOn** | **NSNumber*** | Created on | [optional] 
 **status** | **NSString*** | Status | [optional] 

@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"certificateInfo": @"certificateInfo", @"certificateSignature": @"certificateSignature", @"createdOn": @"createdOn", @"dtid": @"dtid", @"eid": @"eid", @"_id": @"id", @"manifestVersion": @"manifestVersion", @"manifestVersionPolicy": @"manifestVersionPolicy", @"name": @"name", @"needProviderAuth": @"needProviderAuth", @"uid": @"uid" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"certificateInfo": @"certificateInfo", @"certificateSignature": @"certificateSignature", @"createdOn": @"createdOn", @"dtid": @"dtid", @"eid": @"eid", @"id": @"_id", @"manifestVersion": @"manifestVersion", @"manifestVersionPolicy": @"manifestVersionPolicy", @"name": @"name", @"needProviderAuth": @"needProviderAuth", @"uid": @"uid" }];
 }
 
 /**

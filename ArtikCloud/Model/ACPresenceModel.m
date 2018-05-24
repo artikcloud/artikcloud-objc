@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"connected": @"connected", @"lastSeenOn": @"lastSeenOn" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"connected": @"connected", @"lastSeenOn": @"lastSeenOn" }];
 }
 
 /**

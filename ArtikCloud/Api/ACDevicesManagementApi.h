@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "ACAcceptanceStatusResponse.h"
 #import "ACDeviceTaskUpdateRequest.h"
 #import "ACDeviceTaskUpdateResponse.h"
 #import "ACDeviceTypesInfo.h"
@@ -6,6 +7,7 @@
 #import "ACMetadataEnvelope.h"
 #import "ACMetadataPropertiesEnvelope.h"
 #import "ACMetadataQueryEnvelope.h"
+#import "ACPendingTasksList.h"
 #import "ACTaskByDidListEnvelope.h"
 #import "ACTaskEnvelope.h"
 #import "ACTaskListEnvelope.h"
@@ -81,6 +83,17 @@ extern NSInteger kACDevicesManagementApiMissingParamErrorCode;
     order: (NSString*) order
     sort: (NSString*) sort
     completionHandler: (void (^)(ACTaskByDidListEnvelope* output, NSError* error)) handler;
+
+
+/// Returns the list of  pending tasks for a particular device id.
+/// Returns the list of all pending tasks (where acceptanceStatus is equal to WAITING ) for a particular device id.
+///
+/// 
+///  code:0 message:"success"
+///
+/// @return ACPendingTasksList*
+-(NSURLSessionTask*) getAllPendingTasksByDidWithCompletionHandler: 
+    (void (^)(ACPendingTasksList* output, NSError* error)) handler;
 
 
 /// Read a device type device management information.
@@ -187,6 +200,22 @@ extern NSInteger kACDevicesManagementApiMissingParamErrorCode;
     order: (NSString*) order
     sort: (NSString*) sort
     completionHandler: (void (^)(ACTaskListEnvelope* output, NSError* error)) handler;
+
+
+/// Notify/Inform about task acceptance status
+/// User notify/informs to ARTIKCloud about task acceptance status
+///
+/// @param tid Task ID.
+/// @param did Device ID.
+/// @param notifyAboutAcceptanceStatus Notify about task acceptance status
+/// 
+///  code:0 message:"success"
+///
+/// @return ACAcceptanceStatusResponse*
+-(NSURLSessionTask*) notifyAboutAcceptanceWithTid: (NSString*) tid
+    did: (NSString*) did
+    notifyAboutAcceptanceStatus: (ACAcceptanceStatusResponse*) notifyAboutAcceptanceStatus
+    completionHandler: (void (^)(ACAcceptanceStatusResponse* output, NSError* error)) handler;
 
 
 /// Query device properties across devices.

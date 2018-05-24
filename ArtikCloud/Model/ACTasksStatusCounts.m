@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"cANCELLED": @"CANCELLED", @"cOMPLETE": @"COMPLETE", @"pROCESSING": @"PROCESSING", @"rEQUESTED": @"REQUESTED" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"CANCELLED": @"cANCELLED", @"COMPLETE": @"cOMPLETE", @"PROCESSING": @"pROCESSING", @"REQUESTED": @"rEQUESTED" }];
 }
 
 /**

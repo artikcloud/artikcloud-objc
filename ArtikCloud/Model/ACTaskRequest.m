@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"filter": @"filter", @"taskType": @"taskType", @"dtid": @"dtid", @"_property": @"property", @"dids": @"dids", @"taskParameters": @"taskParameters" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"filter": @"filter", @"taskType": @"taskType", @"dtid": @"dtid", @"property": @"_property", @"dids": @"dids", @"taskParameters": @"taskParameters" }];
 }
 
 /**

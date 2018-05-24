@@ -2,9 +2,9 @@
 #import "ACQueryParamCollection.h"
 #import "ACApiClient.h"
 #import "ACDeviceShareInfo.h"
-#import "ACDeviceSharing.h"
+#import "ACDeviceSharingDataResponseBody.h"
 #import "ACDeviceSharingEnvelope.h"
-#import "ACDeviceSharingId.h"
+#import "ACDeviceSharingIdResponseBody.h"
 
 
 @interface ACDevicesSharesApi ()
@@ -59,11 +59,11 @@ NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
 ///
 ///  @param deviceShareInfo Device object that needs to be added 
 ///
-///  @returns ACDeviceSharingId*
+///  @returns ACDeviceSharingIdResponseBody*
 ///
 -(NSURLSessionTask*) createShareForDeviceWithDeviceId: (NSString*) deviceId
     deviceShareInfo: (ACDeviceShareInfo*) deviceShareInfo
-    completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler {
+    completionHandler: (void (^)(ACDeviceSharingIdResponseBody* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
         NSParameterAssert(deviceId);
@@ -130,10 +130,10 @@ NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"ACDeviceSharingId*"
+                              responseType: @"ACDeviceSharingIdResponseBody*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((ACDeviceSharingId*)data, error);
+                                    handler((ACDeviceSharingIdResponseBody*)data, error);
                                 }
                             }];
 }
@@ -145,11 +145,11 @@ NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
 ///
 ///  @param shareId Share ID. 
 ///
-///  @returns ACDeviceSharingId*
+///  @returns ACDeviceSharingIdResponseBody*
 ///
 -(NSURLSessionTask*) deleteSharingForDeviceWithDeviceId: (NSString*) deviceId
     shareId: (NSString*) shareId
-    completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler {
+    completionHandler: (void (^)(ACDeviceSharingIdResponseBody* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
         NSParameterAssert(deviceId);
@@ -218,10 +218,10 @@ NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"ACDeviceSharingId*"
+                              responseType: @"ACDeviceSharingIdResponseBody*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((ACDeviceSharingId*)data, error);
+                                    handler((ACDeviceSharingIdResponseBody*)data, error);
                                 }
                             }];
 }
@@ -316,11 +316,11 @@ NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
 ///
 ///  @param shareId Share ID. 
 ///
-///  @returns ACDeviceSharing*
+///  @returns ACDeviceSharingDataResponseBody*
 ///
 -(NSURLSessionTask*) getSharingForDeviceWithDeviceId: (NSString*) deviceId
     shareId: (NSString*) shareId
-    completionHandler: (void (^)(ACDeviceSharing* output, NSError* error)) handler {
+    completionHandler: (void (^)(ACDeviceSharingDataResponseBody* output, NSError* error)) handler {
     // verify the required parameter 'deviceId' is set
     if (deviceId == nil) {
         NSParameterAssert(deviceId);
@@ -389,10 +389,10 @@ NSInteger kACDevicesSharesApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"ACDeviceSharing*"
+                              responseType: @"ACDeviceSharingDataResponseBody*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((ACDeviceSharing*)data, error);
+                                    handler((ACDeviceSharingDataResponseBody*)data, error);
                                 }
                             }];
 }

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 ```objc
 -(NSURLSessionTask*) createShareForDeviceWithDeviceId: (NSString*) deviceId
     deviceShareInfo: (ACDeviceShareInfo*) deviceShareInfo
-        completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler;
+        completionHandler: (void (^)(ACDeviceSharingIdResponseBody* output, NSError* error)) handler;
 ```
 
 Share a device 
@@ -37,7 +37,7 @@ ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 // Share a device 
 [apiInstance createShareForDeviceWithDeviceId:deviceId
               deviceShareInfo:deviceShareInfo
-          completionHandler: ^(ACDeviceSharingId* output, NSError* error) {
+          completionHandler: ^(ACDeviceSharingIdResponseBody* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ACDeviceSharingId***](ACDeviceSharingId.md)
+[**ACDeviceSharingIdResponseBody***](ACDeviceSharingIdResponseBody.md)
 
 ### Authorization
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) deleteSharingForDeviceWithDeviceId: (NSString*) deviceId
     shareId: (NSString*) shareId
-        completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler;
+        completionHandler: (void (^)(ACDeviceSharingIdResponseBody* output, NSError* error)) handler;
 ```
 
 Delete specific share of the given device id
@@ -96,7 +96,7 @@ ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 // Delete specific share of the given device id
 [apiInstance deleteSharingForDeviceWithDeviceId:deviceId
               shareId:shareId
-          completionHandler: ^(ACDeviceSharingId* output, NSError* error) {
+          completionHandler: ^(ACDeviceSharingIdResponseBody* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ACDeviceSharingId***](ACDeviceSharingId.md)
+[**ACDeviceSharingIdResponseBody***](ACDeviceSharingIdResponseBody.md)
 
 ### Authorization
 
@@ -195,7 +195,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) getSharingForDeviceWithDeviceId: (NSString*) deviceId
     shareId: (NSString*) shareId
-        completionHandler: (void (^)(ACDeviceSharing* output, NSError* error)) handler;
+        completionHandler: (void (^)(ACDeviceSharingDataResponseBody* output, NSError* error)) handler;
 ```
 
 Get specific share of the given device id
@@ -218,7 +218,7 @@ ACDevicesSharesApi*apiInstance = [[ACDevicesSharesApi alloc] init];
 // Get specific share of the given device id
 [apiInstance getSharingForDeviceWithDeviceId:deviceId
               shareId:shareId
-          completionHandler: ^(ACDeviceSharing* output, NSError* error) {
+          completionHandler: ^(ACDeviceSharingDataResponseBody* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ACDeviceSharing***](ACDeviceSharing.md)
+[**ACDeviceSharingDataResponseBody***](ACDeviceSharingDataResponseBody.md)
 
 ### Authorization
 
