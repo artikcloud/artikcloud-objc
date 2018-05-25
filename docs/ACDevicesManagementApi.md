@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**createTasks**](ACDevicesManagementApi.md#createtasks) | **POST** /devicemgmt/tasks | Create a new task for one or more devices
 [**deleteServerProperties**](ACDevicesManagementApi.md#deleteserverproperties) | **DELETE** /devicemgmt/devices/{did}/serverproperties | Deletes a device&#39;s properties.
 [**getAllByDid**](ACDevicesManagementApi.md#getallbydid) | **GET** /devicemgmt/devices/{did}/tasks | Returns the list of tasks for a particular device id with optional status filter.
+[**getAllPendingTasksByDid**](ACDevicesManagementApi.md#getallpendingtasksbydid) | **GET** /devicemgmt/devices/{did}/pendingtasks | Returns the list of  pending tasks for a particular device id.
 [**getDeviceTypesInfo**](ACDevicesManagementApi.md#getdevicetypesinfo) | **GET** /devicemgmt/devicetypes/{dtid} | Read a device type device management information.
 [**getManifestProperties**](ACDevicesManagementApi.md#getmanifestproperties) | **GET** /devicemgmt/devicetypes/{dtid}/manifest/properties | Get a device type&#39;s device management manifest properties
 [**getProperties**](ACDevicesManagementApi.md#getproperties) | **GET** /devicemgmt/devices/{did}/properties | Read a device&#39;s properties.
@@ -14,6 +15,7 @@ Method | HTTP request | Description
 [**getStatusesHistory**](ACDevicesManagementApi.md#getstatuseshistory) | **GET** /devicemgmt/tasks/{tid}/statuses/history | Returns the history of the status changes for a specific task id, or for a specific device id in that task.
 [**getTaskByID**](ACDevicesManagementApi.md#gettaskbyid) | **GET** /devicemgmt/tasks/{tid} | Returns the details and global status of a specific task id.
 [**getTasks**](ACDevicesManagementApi.md#gettasks) | **GET** /devicemgmt/tasks | Returns the all the tasks for a device type.
+[**notifyAboutAcceptance**](ACDevicesManagementApi.md#notifyaboutacceptance) | **POST** /devicemgmt/tasks/{tid}/devices/{did}/acceptance | Notify/Inform about task acceptance status
 [**queryProperties**](ACDevicesManagementApi.md#queryproperties) | **GET** /devicemgmt/devices/properties | Query device properties across devices.
 [**updateDeviceTypesInfo**](ACDevicesManagementApi.md#updatedevicetypesinfo) | **PUT** /devicemgmt/devicetypes/{dtid} | Updates a device type information
 [**updateServerProperties**](ACDevicesManagementApi.md#updateserverproperties) | **POST** /devicemgmt/devices/{did}/serverproperties | Updates a device&#39;s server properties.
@@ -194,6 +196,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ACTaskByDidListEnvelope***](ACTaskByDidListEnvelope.md)
+
+### Authorization
+
+[artikcloud_oauth](../README.md#artikcloud_oauth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAllPendingTasksByDid**
+```objc
+-(NSURLSessionTask*) getAllPendingTasksByDidWithCompletionHandler: 
+        (void (^)(ACPendingTasksList* output, NSError* error)) handler;
+```
+
+Returns the list of  pending tasks for a particular device id.
+
+Returns the list of all pending tasks (where acceptanceStatus is equal to WAITING ) for a particular device id.
+
+### Example 
+```objc
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+
+ACDevicesManagementApi*apiInstance = [[ACDevicesManagementApi alloc] init];
+
+// Returns the list of  pending tasks for a particular device id.
+[apiInstance getAllPendingTasksByDidWithCompletionHandler: 
+          ^(ACPendingTasksList* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling ACDevicesManagementApi->getAllPendingTasksByDid: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ACPendingTasksList***](ACPendingTasksList.md)
 
 ### Authorization
 
@@ -623,6 +676,69 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ACTaskListEnvelope***](ACTaskListEnvelope.md)
+
+### Authorization
+
+[artikcloud_oauth](../README.md#artikcloud_oauth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **notifyAboutAcceptance**
+```objc
+-(NSURLSessionTask*) notifyAboutAcceptanceWithTid: (NSString*) tid
+    did: (NSString*) did
+    notifyAboutAcceptanceStatus: (ACAcceptanceStatusResponse*) notifyAboutAcceptanceStatus
+        completionHandler: (void (^)(ACAcceptanceStatusResponse* output, NSError* error)) handler;
+```
+
+Notify/Inform about task acceptance status
+
+User notify/informs to ARTIKCloud about task acceptance status
+
+### Example 
+```objc
+ACDefaultConfiguration *apiConfig = [ACDefaultConfiguration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: artikcloud_oauth)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+NSString* tid = @"tid_example"; // Task ID.
+NSString* did = @"did_example"; // Device ID.
+ACAcceptanceStatusResponse* notifyAboutAcceptanceStatus = [[ACAcceptanceStatusResponse alloc] init]; // Notify about task acceptance status
+
+ACDevicesManagementApi*apiInstance = [[ACDevicesManagementApi alloc] init];
+
+// Notify/Inform about task acceptance status
+[apiInstance notifyAboutAcceptanceWithTid:tid
+              did:did
+              notifyAboutAcceptanceStatus:notifyAboutAcceptanceStatus
+          completionHandler: ^(ACAcceptanceStatusResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling ACDevicesManagementApi->notifyAboutAcceptance: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tid** | **NSString***| Task ID. | 
+ **did** | **NSString***| Device ID. | 
+ **notifyAboutAcceptanceStatus** | [**ACAcceptanceStatusResponse***](ACAcceptanceStatusResponse*.md)| Notify about task acceptance status | 
+
+### Return type
+
+[**ACAcceptanceStatusResponse***](ACAcceptanceStatusResponse.md)
 
 ### Authorization
 

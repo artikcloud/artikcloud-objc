@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "ArtikCloud"
-    s.version          = "2.2.3"
+    s.version          = "2.2.4"
 
     s.summary          = "ARTIK Cloud API"
     s.description      = <<-DESC
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
     s.homepage     = "https://github.com/artikcloud/artikcloud-objc"
     s.license      = "Proprietary"
     s.source       = { :git => "https://github.com/artikcloud/artikcloud-objc.git", :tag => "#{s.version}" }
-    s.author       = { "Samsung Artik Cloud" => "developer@artik.cloud" }
+    s.author       = { "Samsung ARTIK Cloud" => "support@artik.cloud" }
 
     s.source_files = 'ArtikCloud/**/*.{m,h}'
     s.public_header_files = 'ArtikCloud/**/*.h'

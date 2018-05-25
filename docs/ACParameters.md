@@ -1,0 +1,11 @@
+# ACParameters
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**sourceToPredict** | [**ACManifestField***](ACManifestField.md) |  | [optional] 
+**predictIn** | **NSNumber*** |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

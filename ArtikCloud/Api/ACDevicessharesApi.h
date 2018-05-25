@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "ACDeviceShareInfo.h"
-#import "ACDeviceSharing.h"
+#import "ACDeviceSharingDataResponseBody.h"
 #import "ACDeviceSharingEnvelope.h"
-#import "ACDeviceSharingId.h"
+#import "ACDeviceSharingIdResponseBody.h"
 #import "ACApi.h"
 
 /**
@@ -34,10 +34,10 @@ extern NSInteger kACDevicesSharesApiMissingParamErrorCode;
 /// 
 ///  code:0 message:"success"
 ///
-/// @return ACDeviceSharingId*
+/// @return ACDeviceSharingIdResponseBody*
 -(NSURLSessionTask*) createShareForDeviceWithDeviceId: (NSString*) deviceId
     deviceShareInfo: (ACDeviceShareInfo*) deviceShareInfo
-    completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler;
+    completionHandler: (void (^)(ACDeviceSharingIdResponseBody* output, NSError* error)) handler;
 
 
 /// Delete specific share of the given device id
@@ -48,10 +48,10 @@ extern NSInteger kACDevicesSharesApiMissingParamErrorCode;
 /// 
 ///  code:0 message:"success"
 ///
-/// @return ACDeviceSharingId*
+/// @return ACDeviceSharingIdResponseBody*
 -(NSURLSessionTask*) deleteSharingForDeviceWithDeviceId: (NSString*) deviceId
     shareId: (NSString*) shareId
-    completionHandler: (void (^)(ACDeviceSharingId* output, NSError* error)) handler;
+    completionHandler: (void (^)(ACDeviceSharingIdResponseBody* output, NSError* error)) handler;
 
 
 /// List all shares for the given device id
@@ -78,10 +78,10 @@ extern NSInteger kACDevicesSharesApiMissingParamErrorCode;
 /// 
 ///  code:0 message:"success"
 ///
-/// @return ACDeviceSharing*
+/// @return ACDeviceSharingDataResponseBody*
 -(NSURLSessionTask*) getSharingForDeviceWithDeviceId: (NSString*) deviceId
     shareId: (NSString*) shareId
-    completionHandler: (void (^)(ACDeviceSharing* output, NSError* error)) handler;
+    completionHandler: (void (^)(ACDeviceSharingDataResponseBody* output, NSError* error)) handler;
 
 
 

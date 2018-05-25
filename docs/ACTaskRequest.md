@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **dtid** | **NSString*** | Device Type ID | [optional] 
 **_property** | **NSString*** | Property | [optional] 
 **dids** | **NSArray&lt;NSString*&gt;*** | Device IDs | [optional] 
+**needsAcceptance** | **NSNumber*** | Boolean to check if task needs acceptance for OTA | [optional] 
 **taskParameters** | [**ACTaskParameters***](ACTaskParameters.md) | Task parameters | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
